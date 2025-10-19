@@ -14,5 +14,5 @@ export class LoginUser {
     @IsString()
     @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
     @IsNotEmpty()
-    readonly passwrod: string
+    readonly password: string
 }
