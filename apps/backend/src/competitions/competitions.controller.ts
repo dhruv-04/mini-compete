@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Request, UseGuards, Param } from "@nestjs/common";
+import { Controller, Post, Body, Request, UseGuards, Param, Headers } from "@nestjs/common";
 import { CompetitionsServices } from './competitions.service'
 import { CreateCompetitionDTO } from "./competitionsDto/createCompetitions.dto";
 import { Roles } from "src/auth/roles.decorator";
@@ -15,12 +15,15 @@ export class CompetitionsCOntroller {
         console.log('Organizer is : ', req.user);
         console.log('Creating competition : ', createCompetitionDto);
 
-        return { competitionID: 1 }; //this will be based on how the ID would be generated and returned
+        return this.CompetitionsServices.createCompetitions(createCompetitionDto);
     }
 
     @Post(':id/register')
     @Roles('participant')
-    async register(@Request() req, @Body() Body, @Param(':id') id:string) {
-        
+    async register(@Request() req, @Body() Body, @Param(':id') id:string, @Headers('idempotency-key') idempotencyKey: string) {
+        console.log('Participant is: ', req.user);
+        console.log('Registering for the competition with ID: ', id);
+
+        return this.CompetitionsServices.registerForCompetition(req.email, idempotencyKey  ,id );
     }
 };
