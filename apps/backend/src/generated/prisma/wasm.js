@@ -106,13 +106,16 @@ exports.Prisma.CompetitionsScalarFieldEnum = {
   description: 'description',
   tags: 'tags',
   capacity: 'capacity',
-  regDeadLine: 'regDeadLine'
+  registeredCount: 'registeredCount',
+  regDeadLine: 'regDeadLine',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.RegistrationsScalarFieldEnum = {
   registrationID: 'registrationID',
   userId: 'userId',
-  competitionId: 'competitionId'
+  competitionId: 'competitionId',
+  registeredAt: 'registeredAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -163,7 +166,8 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.17.1",
@@ -172,7 +176,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -181,13 +184,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum UserRole {\n  participant\n  organizer\n}\n\nmodel User {\n  userId   String   @id @default(uuid())\n  email    String   @unique\n  name     String\n  password String\n  role     UserRole\n}\n\nmodel Competitions {\n  competitionId String   @id\n  title         String\n  description   String\n  tags          String[]\n  capacity      Int\n  regDeadLine   DateTime\n}\n\nmodel Registrations {\n  registrationID String @id\n  userId         String\n  competitionId  String\n\n  @@unique([userId, competitionId])\n}\n",
-  "inlineSchemaHash": "11a2e92fa6707097bab9e82ae548294eb3807e411d6f45e4fd9b301780001ec4",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum UserRole {\n  participant\n  organizer\n}\n\nmodel User {\n  userId   String   @id @default(uuid())\n  email    String   @unique\n  name     String\n  password String\n  role     UserRole\n}\n\nmodel Competitions {\n  competitionId   String   @id @default(uuid())\n  title           String\n  description     String\n  tags            String[]\n  capacity        Int\n  registeredCount Int      @default(0)\n  regDeadLine     DateTime\n  createdAt       DateTime @default(now())\n}\n\nmodel Registrations {\n  registrationID String   @id @default(uuid())\n  userId         String\n  competitionId  String\n  registeredAt   DateTime @default(now())\n\n  @@unique([userId, competitionId])\n}\n",
+  "inlineSchemaHash": "78dafc6d631d2658156f74a9fd31cdae6da643c2c88da70af33e031d9d1078ab",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"UserRole\"}],\"dbName\":null},\"Competitions\":{\"fields\":[{\"name\":\"competitionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tags\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"capacity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"regDeadLine\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Registrations\":{\"fields\":[{\"name\":\"registrationID\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"competitionId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"UserRole\"}],\"dbName\":null},\"Competitions\":{\"fields\":[{\"name\":\"competitionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tags\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"capacity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"registeredCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"regDeadLine\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Registrations\":{\"fields\":[{\"name\":\"registrationID\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"competitionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"registeredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

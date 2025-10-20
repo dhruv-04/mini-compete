@@ -134,13 +134,16 @@ exports.Prisma.CompetitionsScalarFieldEnum = {
   description: 'description',
   tags: 'tags',
   capacity: 'capacity',
-  regDeadLine: 'regDeadLine'
+  registeredCount: 'registeredCount',
+  regDeadLine: 'regDeadLine',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.RegistrationsScalarFieldEnum = {
   registrationID: 'registrationID',
   userId: 'userId',
-  competitionId: 'competitionId'
+  competitionId: 'competitionId',
+  registeredAt: 'registeredAt'
 };
 
 exports.Prisma.SortOrder = {

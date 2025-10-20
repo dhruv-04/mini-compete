@@ -28,17 +28,20 @@ model User {
 }
 
 model Competitions {
-  competitionId String @id
+  competitionId String @id @default(uuid())
   title String
   description String
   tags String[]
   capacity Int
+  registeredCount Int @default(0)
   regDeadLine DateTime
+  createdAt DateTime @default(now())
 }
 
 model Registrations {
-  registrationID String @id
+  registrationID String @id @default(uuid())
   userId String 
   competitionId String
+  registeredAt DateTime @default(now())
   @@unique([userId, competitionId])
 }
