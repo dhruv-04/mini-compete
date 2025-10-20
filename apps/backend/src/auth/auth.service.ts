@@ -4,6 +4,7 @@ import { LoginUser } from "./usersDTO/loginUser.dto";
 import { JwtService } from "@nestjs/jwt";
 import { hash, compare } from "bcrypt";
 import { PrismaService } from "../prisma/prisma.service";
+import { timestamp } from "rxjs"
 
 @Injectable()
 export class AuthService {
@@ -37,6 +38,8 @@ export class AuthService {
 
         const payload = { email: user.email, userId: user.userId, role: user.role };
         const token = this.jwtService.sign(payload, { expiresIn: '1h' });
+
+        console.log(`User created successfully at ${timestamp}`)
         return { message:"User Creted succesfully!", accessToken: token };
     }
 

@@ -2068,10 +2068,12 @@ export namespace Prisma {
 
   export type CompetitionsAvgAggregateOutputType = {
     capacity: number | null
+    registeredCount: number | null
   }
 
   export type CompetitionsSumAggregateOutputType = {
     capacity: number | null
+    registeredCount: number | null
   }
 
   export type CompetitionsMinAggregateOutputType = {
@@ -2079,7 +2081,9 @@ export namespace Prisma {
     title: string | null
     description: string | null
     capacity: number | null
+    registeredCount: number | null
     regDeadLine: Date | null
+    createdAt: Date | null
   }
 
   export type CompetitionsMaxAggregateOutputType = {
@@ -2087,7 +2091,9 @@ export namespace Prisma {
     title: string | null
     description: string | null
     capacity: number | null
+    registeredCount: number | null
     regDeadLine: Date | null
+    createdAt: Date | null
   }
 
   export type CompetitionsCountAggregateOutputType = {
@@ -2096,17 +2102,21 @@ export namespace Prisma {
     description: number
     tags: number
     capacity: number
+    registeredCount: number
     regDeadLine: number
+    createdAt: number
     _all: number
   }
 
 
   export type CompetitionsAvgAggregateInputType = {
     capacity?: true
+    registeredCount?: true
   }
 
   export type CompetitionsSumAggregateInputType = {
     capacity?: true
+    registeredCount?: true
   }
 
   export type CompetitionsMinAggregateInputType = {
@@ -2114,7 +2124,9 @@ export namespace Prisma {
     title?: true
     description?: true
     capacity?: true
+    registeredCount?: true
     regDeadLine?: true
+    createdAt?: true
   }
 
   export type CompetitionsMaxAggregateInputType = {
@@ -2122,7 +2134,9 @@ export namespace Prisma {
     title?: true
     description?: true
     capacity?: true
+    registeredCount?: true
     regDeadLine?: true
+    createdAt?: true
   }
 
   export type CompetitionsCountAggregateInputType = {
@@ -2131,7 +2145,9 @@ export namespace Prisma {
     description?: true
     tags?: true
     capacity?: true
+    registeredCount?: true
     regDeadLine?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -2227,7 +2243,9 @@ export namespace Prisma {
     description: string
     tags: string[]
     capacity: number
+    registeredCount: number
     regDeadLine: Date
+    createdAt: Date
     _count: CompetitionsCountAggregateOutputType | null
     _avg: CompetitionsAvgAggregateOutputType | null
     _sum: CompetitionsSumAggregateOutputType | null
@@ -2255,7 +2273,9 @@ export namespace Prisma {
     description?: boolean
     tags?: boolean
     capacity?: boolean
+    registeredCount?: boolean
     regDeadLine?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["competitions"]>
 
   export type CompetitionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2264,7 +2284,9 @@ export namespace Prisma {
     description?: boolean
     tags?: boolean
     capacity?: boolean
+    registeredCount?: boolean
     regDeadLine?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["competitions"]>
 
   export type CompetitionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2273,7 +2295,9 @@ export namespace Prisma {
     description?: boolean
     tags?: boolean
     capacity?: boolean
+    registeredCount?: boolean
     regDeadLine?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["competitions"]>
 
   export type CompetitionsSelectScalar = {
@@ -2282,10 +2306,12 @@ export namespace Prisma {
     description?: boolean
     tags?: boolean
     capacity?: boolean
+    registeredCount?: boolean
     regDeadLine?: boolean
+    createdAt?: boolean
   }
 
-  export type CompetitionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"competitionId" | "title" | "description" | "tags" | "capacity" | "regDeadLine", ExtArgs["result"]["competitions"]>
+  export type CompetitionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"competitionId" | "title" | "description" | "tags" | "capacity" | "registeredCount" | "regDeadLine" | "createdAt", ExtArgs["result"]["competitions"]>
 
   export type $CompetitionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Competitions"
@@ -2296,7 +2322,9 @@ export namespace Prisma {
       description: string
       tags: string[]
       capacity: number
+      registeredCount: number
       regDeadLine: Date
+      createdAt: Date
     }, ExtArgs["result"]["competitions"]>
     composites: {}
   }
@@ -2725,7 +2753,9 @@ export namespace Prisma {
     readonly description: FieldRef<"Competitions", 'String'>
     readonly tags: FieldRef<"Competitions", 'String[]'>
     readonly capacity: FieldRef<"Competitions", 'Int'>
+    readonly registeredCount: FieldRef<"Competitions", 'Int'>
     readonly regDeadLine: FieldRef<"Competitions", 'DateTime'>
+    readonly createdAt: FieldRef<"Competitions", 'DateTime'>
   }
     
 
@@ -3106,18 +3136,21 @@ export namespace Prisma {
     registrationID: string | null
     userId: string | null
     competitionId: string | null
+    registeredAt: Date | null
   }
 
   export type RegistrationsMaxAggregateOutputType = {
     registrationID: string | null
     userId: string | null
     competitionId: string | null
+    registeredAt: Date | null
   }
 
   export type RegistrationsCountAggregateOutputType = {
     registrationID: number
     userId: number
     competitionId: number
+    registeredAt: number
     _all: number
   }
 
@@ -3126,18 +3159,21 @@ export namespace Prisma {
     registrationID?: true
     userId?: true
     competitionId?: true
+    registeredAt?: true
   }
 
   export type RegistrationsMaxAggregateInputType = {
     registrationID?: true
     userId?: true
     competitionId?: true
+    registeredAt?: true
   }
 
   export type RegistrationsCountAggregateInputType = {
     registrationID?: true
     userId?: true
     competitionId?: true
+    registeredAt?: true
     _all?: true
   }
 
@@ -3217,6 +3253,7 @@ export namespace Prisma {
     registrationID: string
     userId: string
     competitionId: string
+    registeredAt: Date
     _count: RegistrationsCountAggregateOutputType | null
     _min: RegistrationsMinAggregateOutputType | null
     _max: RegistrationsMaxAggregateOutputType | null
@@ -3240,27 +3277,31 @@ export namespace Prisma {
     registrationID?: boolean
     userId?: boolean
     competitionId?: boolean
+    registeredAt?: boolean
   }, ExtArgs["result"]["registrations"]>
 
   export type RegistrationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     registrationID?: boolean
     userId?: boolean
     competitionId?: boolean
+    registeredAt?: boolean
   }, ExtArgs["result"]["registrations"]>
 
   export type RegistrationsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     registrationID?: boolean
     userId?: boolean
     competitionId?: boolean
+    registeredAt?: boolean
   }, ExtArgs["result"]["registrations"]>
 
   export type RegistrationsSelectScalar = {
     registrationID?: boolean
     userId?: boolean
     competitionId?: boolean
+    registeredAt?: boolean
   }
 
-  export type RegistrationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"registrationID" | "userId" | "competitionId", ExtArgs["result"]["registrations"]>
+  export type RegistrationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"registrationID" | "userId" | "competitionId" | "registeredAt", ExtArgs["result"]["registrations"]>
 
   export type $RegistrationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Registrations"
@@ -3269,6 +3310,7 @@ export namespace Prisma {
       registrationID: string
       userId: string
       competitionId: string
+      registeredAt: Date
     }, ExtArgs["result"]["registrations"]>
     composites: {}
   }
@@ -3695,6 +3737,7 @@ export namespace Prisma {
     readonly registrationID: FieldRef<"Registrations", 'String'>
     readonly userId: FieldRef<"Registrations", 'String'>
     readonly competitionId: FieldRef<"Registrations", 'String'>
+    readonly registeredAt: FieldRef<"Registrations", 'DateTime'>
   }
     
 
@@ -4092,7 +4135,9 @@ export namespace Prisma {
     description: 'description',
     tags: 'tags',
     capacity: 'capacity',
-    regDeadLine: 'regDeadLine'
+    registeredCount: 'registeredCount',
+    regDeadLine: 'regDeadLine',
+    createdAt: 'createdAt'
   };
 
   export type CompetitionsScalarFieldEnum = (typeof CompetitionsScalarFieldEnum)[keyof typeof CompetitionsScalarFieldEnum]
@@ -4101,7 +4146,8 @@ export namespace Prisma {
   export const RegistrationsScalarFieldEnum: {
     registrationID: 'registrationID',
     userId: 'userId',
-    competitionId: 'competitionId'
+    competitionId: 'competitionId',
+    registeredAt: 'registeredAt'
   };
 
   export type RegistrationsScalarFieldEnum = (typeof RegistrationsScalarFieldEnum)[keyof typeof RegistrationsScalarFieldEnum]
@@ -4262,7 +4308,9 @@ export namespace Prisma {
     description?: StringFilter<"Competitions"> | string
     tags?: StringNullableListFilter<"Competitions">
     capacity?: IntFilter<"Competitions"> | number
+    registeredCount?: IntFilter<"Competitions"> | number
     regDeadLine?: DateTimeFilter<"Competitions"> | Date | string
+    createdAt?: DateTimeFilter<"Competitions"> | Date | string
   }
 
   export type CompetitionsOrderByWithRelationInput = {
@@ -4271,7 +4319,9 @@ export namespace Prisma {
     description?: SortOrder
     tags?: SortOrder
     capacity?: SortOrder
+    registeredCount?: SortOrder
     regDeadLine?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type CompetitionsWhereUniqueInput = Prisma.AtLeast<{
@@ -4283,7 +4333,9 @@ export namespace Prisma {
     description?: StringFilter<"Competitions"> | string
     tags?: StringNullableListFilter<"Competitions">
     capacity?: IntFilter<"Competitions"> | number
+    registeredCount?: IntFilter<"Competitions"> | number
     regDeadLine?: DateTimeFilter<"Competitions"> | Date | string
+    createdAt?: DateTimeFilter<"Competitions"> | Date | string
   }, "competitionId">
 
   export type CompetitionsOrderByWithAggregationInput = {
@@ -4292,7 +4344,9 @@ export namespace Prisma {
     description?: SortOrder
     tags?: SortOrder
     capacity?: SortOrder
+    registeredCount?: SortOrder
     regDeadLine?: SortOrder
+    createdAt?: SortOrder
     _count?: CompetitionsCountOrderByAggregateInput
     _avg?: CompetitionsAvgOrderByAggregateInput
     _max?: CompetitionsMaxOrderByAggregateInput
@@ -4309,7 +4363,9 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Competitions"> | string
     tags?: StringNullableListFilter<"Competitions">
     capacity?: IntWithAggregatesFilter<"Competitions"> | number
+    registeredCount?: IntWithAggregatesFilter<"Competitions"> | number
     regDeadLine?: DateTimeWithAggregatesFilter<"Competitions"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Competitions"> | Date | string
   }
 
   export type RegistrationsWhereInput = {
@@ -4319,12 +4375,14 @@ export namespace Prisma {
     registrationID?: StringFilter<"Registrations"> | string
     userId?: StringFilter<"Registrations"> | string
     competitionId?: StringFilter<"Registrations"> | string
+    registeredAt?: DateTimeFilter<"Registrations"> | Date | string
   }
 
   export type RegistrationsOrderByWithRelationInput = {
     registrationID?: SortOrder
     userId?: SortOrder
     competitionId?: SortOrder
+    registeredAt?: SortOrder
   }
 
   export type RegistrationsWhereUniqueInput = Prisma.AtLeast<{
@@ -4335,12 +4393,14 @@ export namespace Prisma {
     NOT?: RegistrationsWhereInput | RegistrationsWhereInput[]
     userId?: StringFilter<"Registrations"> | string
     competitionId?: StringFilter<"Registrations"> | string
+    registeredAt?: DateTimeFilter<"Registrations"> | Date | string
   }, "registrationID" | "userId_competitionId">
 
   export type RegistrationsOrderByWithAggregationInput = {
     registrationID?: SortOrder
     userId?: SortOrder
     competitionId?: SortOrder
+    registeredAt?: SortOrder
     _count?: RegistrationsCountOrderByAggregateInput
     _max?: RegistrationsMaxOrderByAggregateInput
     _min?: RegistrationsMinOrderByAggregateInput
@@ -4353,6 +4413,7 @@ export namespace Prisma {
     registrationID?: StringWithAggregatesFilter<"Registrations"> | string
     userId?: StringWithAggregatesFilter<"Registrations"> | string
     competitionId?: StringWithAggregatesFilter<"Registrations"> | string
+    registeredAt?: DateTimeWithAggregatesFilter<"Registrations"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -4412,21 +4473,25 @@ export namespace Prisma {
   }
 
   export type CompetitionsCreateInput = {
-    competitionId: string
+    competitionId?: string
     title: string
     description: string
     tags?: CompetitionsCreatetagsInput | string[]
     capacity: number
+    registeredCount?: number
     regDeadLine: Date | string
+    createdAt?: Date | string
   }
 
   export type CompetitionsUncheckedCreateInput = {
-    competitionId: string
+    competitionId?: string
     title: string
     description: string
     tags?: CompetitionsCreatetagsInput | string[]
     capacity: number
+    registeredCount?: number
     regDeadLine: Date | string
+    createdAt?: Date | string
   }
 
   export type CompetitionsUpdateInput = {
@@ -4435,7 +4500,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     tags?: CompetitionsUpdatetagsInput | string[]
     capacity?: IntFieldUpdateOperationsInput | number
+    registeredCount?: IntFieldUpdateOperationsInput | number
     regDeadLine?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CompetitionsUncheckedUpdateInput = {
@@ -4444,16 +4511,20 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     tags?: CompetitionsUpdatetagsInput | string[]
     capacity?: IntFieldUpdateOperationsInput | number
+    registeredCount?: IntFieldUpdateOperationsInput | number
     regDeadLine?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CompetitionsCreateManyInput = {
-    competitionId: string
+    competitionId?: string
     title: string
     description: string
     tags?: CompetitionsCreatetagsInput | string[]
     capacity: number
+    registeredCount?: number
     regDeadLine: Date | string
+    createdAt?: Date | string
   }
 
   export type CompetitionsUpdateManyMutationInput = {
@@ -4462,7 +4533,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     tags?: CompetitionsUpdatetagsInput | string[]
     capacity?: IntFieldUpdateOperationsInput | number
+    registeredCount?: IntFieldUpdateOperationsInput | number
     regDeadLine?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CompetitionsUncheckedUpdateManyInput = {
@@ -4471,49 +4544,58 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     tags?: CompetitionsUpdatetagsInput | string[]
     capacity?: IntFieldUpdateOperationsInput | number
+    registeredCount?: IntFieldUpdateOperationsInput | number
     regDeadLine?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RegistrationsCreateInput = {
-    registrationID: string
+    registrationID?: string
     userId: string
     competitionId: string
+    registeredAt?: Date | string
   }
 
   export type RegistrationsUncheckedCreateInput = {
-    registrationID: string
+    registrationID?: string
     userId: string
     competitionId: string
+    registeredAt?: Date | string
   }
 
   export type RegistrationsUpdateInput = {
     registrationID?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     competitionId?: StringFieldUpdateOperationsInput | string
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RegistrationsUncheckedUpdateInput = {
     registrationID?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     competitionId?: StringFieldUpdateOperationsInput | string
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RegistrationsCreateManyInput = {
-    registrationID: string
+    registrationID?: string
     userId: string
     competitionId: string
+    registeredAt?: Date | string
   }
 
   export type RegistrationsUpdateManyMutationInput = {
     registrationID?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     competitionId?: StringFieldUpdateOperationsInput | string
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RegistrationsUncheckedUpdateManyInput = {
     registrationID?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     competitionId?: StringFieldUpdateOperationsInput | string
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -4626,11 +4708,14 @@ export namespace Prisma {
     description?: SortOrder
     tags?: SortOrder
     capacity?: SortOrder
+    registeredCount?: SortOrder
     regDeadLine?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type CompetitionsAvgOrderByAggregateInput = {
     capacity?: SortOrder
+    registeredCount?: SortOrder
   }
 
   export type CompetitionsMaxOrderByAggregateInput = {
@@ -4638,7 +4723,9 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     capacity?: SortOrder
+    registeredCount?: SortOrder
     regDeadLine?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type CompetitionsMinOrderByAggregateInput = {
@@ -4646,11 +4733,14 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     capacity?: SortOrder
+    registeredCount?: SortOrder
     regDeadLine?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type CompetitionsSumOrderByAggregateInput = {
     capacity?: SortOrder
+    registeredCount?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -4692,18 +4782,21 @@ export namespace Prisma {
     registrationID?: SortOrder
     userId?: SortOrder
     competitionId?: SortOrder
+    registeredAt?: SortOrder
   }
 
   export type RegistrationsMaxOrderByAggregateInput = {
     registrationID?: SortOrder
     userId?: SortOrder
     competitionId?: SortOrder
+    registeredAt?: SortOrder
   }
 
   export type RegistrationsMinOrderByAggregateInput = {
     registrationID?: SortOrder
     userId?: SortOrder
     competitionId?: SortOrder
+    registeredAt?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
