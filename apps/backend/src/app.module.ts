@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { redisStore } from 'cache-manager-redis-store'
 import { CacheModule } from '@nestjs/cache-manager';
+import { BullModule } from "@nestjs/bullmq";
  
 @Module({
   imports: [
@@ -25,6 +26,18 @@ import { CacheModule } from '@nestjs/cache-manager';
         }),
         ttl: 3600
       }),
+    }),
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        return {
+            connection: {
+            host: configService.get<string>('REDIS_HOST'),
+            port: configService.get<number>('REDIS_PORT'),
+          }
+        };
+      },
     }),
     PrismaModule,
     AuthModule,
