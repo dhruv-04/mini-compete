@@ -45,3 +45,20 @@ model Registrations {
   registeredAt DateTime @default(now())
   @@unique([userId, competitionId])
 }
+
+model MailBox {
+  id String @default(uuid()) @id
+  userId String
+  to String
+  subject String
+  body String
+  sentAt DateTime @default(now())
+}
+
+model FailedJobs {
+  id String @default(uuid()) @id
+  jobId String
+  payload Json
+  reason String
+  failedAt DateTime @default(now())
+}

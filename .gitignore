@@ -1,2 +1,3 @@
 ./apps/backend/node_modules
 .env
+./apps/backend/src/generated/prisma

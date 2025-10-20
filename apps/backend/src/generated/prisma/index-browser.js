@@ -146,14 +146,41 @@ exports.Prisma.RegistrationsScalarFieldEnum = {
   registeredAt: 'registeredAt'
 };
 
+exports.Prisma.MailBoxScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  to: 'to',
+  subject: 'subject',
+  body: 'body',
+  sentAt: 'sentAt'
+};
+
+exports.Prisma.FailedJobsScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  payload: 'payload',
+  reason: 'reason',
+  failedAt: 'failedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.UserRole = exports.$Enums.UserRole = {
   participant: 'participant',
@@ -163,7 +190,9 @@ exports.UserRole = exports.$Enums.UserRole = {
 exports.Prisma.ModelName = {
   User: 'User',
   Competitions: 'Competitions',
-  Registrations: 'Registrations'
+  Registrations: 'Registrations',
+  MailBox: 'MailBox',
+  FailedJobs: 'FailedJobs'
 };
 
 /**

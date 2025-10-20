@@ -28,6 +28,16 @@ export type Competitions = $Result.DefaultSelection<Prisma.$CompetitionsPayload>
  * 
  */
 export type Registrations = $Result.DefaultSelection<Prisma.$RegistrationsPayload>
+/**
+ * Model MailBox
+ * 
+ */
+export type MailBox = $Result.DefaultSelection<Prisma.$MailBoxPayload>
+/**
+ * Model FailedJobs
+ * 
+ */
+export type FailedJobs = $Result.DefaultSelection<Prisma.$FailedJobsPayload>
 
 /**
  * Enums
@@ -193,6 +203,26 @@ export class PrismaClient<
     * ```
     */
   get registrations(): Prisma.RegistrationsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mailBox`: Exposes CRUD operations for the **MailBox** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MailBoxes
+    * const mailBoxes = await prisma.mailBox.findMany()
+    * ```
+    */
+  get mailBox(): Prisma.MailBoxDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.failedJobs`: Exposes CRUD operations for the **FailedJobs** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FailedJobs
+    * const failedJobs = await prisma.failedJobs.findMany()
+    * ```
+    */
+  get failedJobs(): Prisma.FailedJobsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -635,7 +665,9 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Competitions: 'Competitions',
-    Registrations: 'Registrations'
+    Registrations: 'Registrations',
+    MailBox: 'MailBox',
+    FailedJobs: 'FailedJobs'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -654,7 +686,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "competitions" | "registrations"
+      modelProps: "user" | "competitions" | "registrations" | "mailBox" | "failedJobs"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -880,6 +912,154 @@ export namespace Prisma {
           }
         }
       }
+      MailBox: {
+        payload: Prisma.$MailBoxPayload<ExtArgs>
+        fields: Prisma.MailBoxFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MailBoxFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MailBoxFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload>
+          }
+          findFirst: {
+            args: Prisma.MailBoxFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MailBoxFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload>
+          }
+          findMany: {
+            args: Prisma.MailBoxFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload>[]
+          }
+          create: {
+            args: Prisma.MailBoxCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload>
+          }
+          createMany: {
+            args: Prisma.MailBoxCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MailBoxCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload>[]
+          }
+          delete: {
+            args: Prisma.MailBoxDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload>
+          }
+          update: {
+            args: Prisma.MailBoxUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload>
+          }
+          deleteMany: {
+            args: Prisma.MailBoxDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MailBoxUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MailBoxUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload>[]
+          }
+          upsert: {
+            args: Prisma.MailBoxUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MailBoxPayload>
+          }
+          aggregate: {
+            args: Prisma.MailBoxAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMailBox>
+          }
+          groupBy: {
+            args: Prisma.MailBoxGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MailBoxGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MailBoxCountArgs<ExtArgs>
+            result: $Utils.Optional<MailBoxCountAggregateOutputType> | number
+          }
+        }
+      }
+      FailedJobs: {
+        payload: Prisma.$FailedJobsPayload<ExtArgs>
+        fields: Prisma.FailedJobsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FailedJobsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FailedJobsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload>
+          }
+          findFirst: {
+            args: Prisma.FailedJobsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FailedJobsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload>
+          }
+          findMany: {
+            args: Prisma.FailedJobsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload>[]
+          }
+          create: {
+            args: Prisma.FailedJobsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload>
+          }
+          createMany: {
+            args: Prisma.FailedJobsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FailedJobsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload>[]
+          }
+          delete: {
+            args: Prisma.FailedJobsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload>
+          }
+          update: {
+            args: Prisma.FailedJobsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload>
+          }
+          deleteMany: {
+            args: Prisma.FailedJobsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FailedJobsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FailedJobsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload>[]
+          }
+          upsert: {
+            args: Prisma.FailedJobsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FailedJobsPayload>
+          }
+          aggregate: {
+            args: Prisma.FailedJobsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFailedJobs>
+          }
+          groupBy: {
+            args: Prisma.FailedJobsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FailedJobsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FailedJobsCountArgs<ExtArgs>
+            result: $Utils.Optional<FailedJobsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -979,6 +1159,8 @@ export namespace Prisma {
     user?: UserOmit
     competitions?: CompetitionsOmit
     registrations?: RegistrationsOmit
+    mailBox?: MailBoxOmit
+    failedJobs?: FailedJobsOmit
   }
 
   /* Types for Logging */
@@ -4105,6 +4287,2005 @@ export namespace Prisma {
 
 
   /**
+   * Model MailBox
+   */
+
+  export type AggregateMailBox = {
+    _count: MailBoxCountAggregateOutputType | null
+    _min: MailBoxMinAggregateOutputType | null
+    _max: MailBoxMaxAggregateOutputType | null
+  }
+
+  export type MailBoxMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    to: string | null
+    subject: string | null
+    body: string | null
+    sentAt: Date | null
+  }
+
+  export type MailBoxMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    to: string | null
+    subject: string | null
+    body: string | null
+    sentAt: Date | null
+  }
+
+  export type MailBoxCountAggregateOutputType = {
+    id: number
+    userId: number
+    to: number
+    subject: number
+    body: number
+    sentAt: number
+    _all: number
+  }
+
+
+  export type MailBoxMinAggregateInputType = {
+    id?: true
+    userId?: true
+    to?: true
+    subject?: true
+    body?: true
+    sentAt?: true
+  }
+
+  export type MailBoxMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    to?: true
+    subject?: true
+    body?: true
+    sentAt?: true
+  }
+
+  export type MailBoxCountAggregateInputType = {
+    id?: true
+    userId?: true
+    to?: true
+    subject?: true
+    body?: true
+    sentAt?: true
+    _all?: true
+  }
+
+  export type MailBoxAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MailBox to aggregate.
+     */
+    where?: MailBoxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MailBoxes to fetch.
+     */
+    orderBy?: MailBoxOrderByWithRelationInput | MailBoxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MailBoxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MailBoxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MailBoxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MailBoxes
+    **/
+    _count?: true | MailBoxCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MailBoxMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MailBoxMaxAggregateInputType
+  }
+
+  export type GetMailBoxAggregateType<T extends MailBoxAggregateArgs> = {
+        [P in keyof T & keyof AggregateMailBox]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMailBox[P]>
+      : GetScalarType<T[P], AggregateMailBox[P]>
+  }
+
+
+
+
+  export type MailBoxGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MailBoxWhereInput
+    orderBy?: MailBoxOrderByWithAggregationInput | MailBoxOrderByWithAggregationInput[]
+    by: MailBoxScalarFieldEnum[] | MailBoxScalarFieldEnum
+    having?: MailBoxScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MailBoxCountAggregateInputType | true
+    _min?: MailBoxMinAggregateInputType
+    _max?: MailBoxMaxAggregateInputType
+  }
+
+  export type MailBoxGroupByOutputType = {
+    id: string
+    userId: string
+    to: string
+    subject: string
+    body: string
+    sentAt: Date
+    _count: MailBoxCountAggregateOutputType | null
+    _min: MailBoxMinAggregateOutputType | null
+    _max: MailBoxMaxAggregateOutputType | null
+  }
+
+  type GetMailBoxGroupByPayload<T extends MailBoxGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MailBoxGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MailBoxGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MailBoxGroupByOutputType[P]>
+            : GetScalarType<T[P], MailBoxGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MailBoxSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    to?: boolean
+    subject?: boolean
+    body?: boolean
+    sentAt?: boolean
+  }, ExtArgs["result"]["mailBox"]>
+
+  export type MailBoxSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    to?: boolean
+    subject?: boolean
+    body?: boolean
+    sentAt?: boolean
+  }, ExtArgs["result"]["mailBox"]>
+
+  export type MailBoxSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    to?: boolean
+    subject?: boolean
+    body?: boolean
+    sentAt?: boolean
+  }, ExtArgs["result"]["mailBox"]>
+
+  export type MailBoxSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    to?: boolean
+    subject?: boolean
+    body?: boolean
+    sentAt?: boolean
+  }
+
+  export type MailBoxOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "to" | "subject" | "body" | "sentAt", ExtArgs["result"]["mailBox"]>
+
+  export type $MailBoxPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MailBox"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      to: string
+      subject: string
+      body: string
+      sentAt: Date
+    }, ExtArgs["result"]["mailBox"]>
+    composites: {}
+  }
+
+  type MailBoxGetPayload<S extends boolean | null | undefined | MailBoxDefaultArgs> = $Result.GetResult<Prisma.$MailBoxPayload, S>
+
+  type MailBoxCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MailBoxFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MailBoxCountAggregateInputType | true
+    }
+
+  export interface MailBoxDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MailBox'], meta: { name: 'MailBox' } }
+    /**
+     * Find zero or one MailBox that matches the filter.
+     * @param {MailBoxFindUniqueArgs} args - Arguments to find a MailBox
+     * @example
+     * // Get one MailBox
+     * const mailBox = await prisma.mailBox.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MailBoxFindUniqueArgs>(args: SelectSubset<T, MailBoxFindUniqueArgs<ExtArgs>>): Prisma__MailBoxClient<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MailBox that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MailBoxFindUniqueOrThrowArgs} args - Arguments to find a MailBox
+     * @example
+     * // Get one MailBox
+     * const mailBox = await prisma.mailBox.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MailBoxFindUniqueOrThrowArgs>(args: SelectSubset<T, MailBoxFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MailBoxClient<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MailBox that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailBoxFindFirstArgs} args - Arguments to find a MailBox
+     * @example
+     * // Get one MailBox
+     * const mailBox = await prisma.mailBox.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MailBoxFindFirstArgs>(args?: SelectSubset<T, MailBoxFindFirstArgs<ExtArgs>>): Prisma__MailBoxClient<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MailBox that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailBoxFindFirstOrThrowArgs} args - Arguments to find a MailBox
+     * @example
+     * // Get one MailBox
+     * const mailBox = await prisma.mailBox.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MailBoxFindFirstOrThrowArgs>(args?: SelectSubset<T, MailBoxFindFirstOrThrowArgs<ExtArgs>>): Prisma__MailBoxClient<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MailBoxes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailBoxFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MailBoxes
+     * const mailBoxes = await prisma.mailBox.findMany()
+     * 
+     * // Get first 10 MailBoxes
+     * const mailBoxes = await prisma.mailBox.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mailBoxWithIdOnly = await prisma.mailBox.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MailBoxFindManyArgs>(args?: SelectSubset<T, MailBoxFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MailBox.
+     * @param {MailBoxCreateArgs} args - Arguments to create a MailBox.
+     * @example
+     * // Create one MailBox
+     * const MailBox = await prisma.mailBox.create({
+     *   data: {
+     *     // ... data to create a MailBox
+     *   }
+     * })
+     * 
+     */
+    create<T extends MailBoxCreateArgs>(args: SelectSubset<T, MailBoxCreateArgs<ExtArgs>>): Prisma__MailBoxClient<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MailBoxes.
+     * @param {MailBoxCreateManyArgs} args - Arguments to create many MailBoxes.
+     * @example
+     * // Create many MailBoxes
+     * const mailBox = await prisma.mailBox.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MailBoxCreateManyArgs>(args?: SelectSubset<T, MailBoxCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MailBoxes and returns the data saved in the database.
+     * @param {MailBoxCreateManyAndReturnArgs} args - Arguments to create many MailBoxes.
+     * @example
+     * // Create many MailBoxes
+     * const mailBox = await prisma.mailBox.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MailBoxes and only return the `id`
+     * const mailBoxWithIdOnly = await prisma.mailBox.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MailBoxCreateManyAndReturnArgs>(args?: SelectSubset<T, MailBoxCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MailBox.
+     * @param {MailBoxDeleteArgs} args - Arguments to delete one MailBox.
+     * @example
+     * // Delete one MailBox
+     * const MailBox = await prisma.mailBox.delete({
+     *   where: {
+     *     // ... filter to delete one MailBox
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MailBoxDeleteArgs>(args: SelectSubset<T, MailBoxDeleteArgs<ExtArgs>>): Prisma__MailBoxClient<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MailBox.
+     * @param {MailBoxUpdateArgs} args - Arguments to update one MailBox.
+     * @example
+     * // Update one MailBox
+     * const mailBox = await prisma.mailBox.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MailBoxUpdateArgs>(args: SelectSubset<T, MailBoxUpdateArgs<ExtArgs>>): Prisma__MailBoxClient<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MailBoxes.
+     * @param {MailBoxDeleteManyArgs} args - Arguments to filter MailBoxes to delete.
+     * @example
+     * // Delete a few MailBoxes
+     * const { count } = await prisma.mailBox.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MailBoxDeleteManyArgs>(args?: SelectSubset<T, MailBoxDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MailBoxes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailBoxUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MailBoxes
+     * const mailBox = await prisma.mailBox.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MailBoxUpdateManyArgs>(args: SelectSubset<T, MailBoxUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MailBoxes and returns the data updated in the database.
+     * @param {MailBoxUpdateManyAndReturnArgs} args - Arguments to update many MailBoxes.
+     * @example
+     * // Update many MailBoxes
+     * const mailBox = await prisma.mailBox.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MailBoxes and only return the `id`
+     * const mailBoxWithIdOnly = await prisma.mailBox.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MailBoxUpdateManyAndReturnArgs>(args: SelectSubset<T, MailBoxUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MailBox.
+     * @param {MailBoxUpsertArgs} args - Arguments to update or create a MailBox.
+     * @example
+     * // Update or create a MailBox
+     * const mailBox = await prisma.mailBox.upsert({
+     *   create: {
+     *     // ... data to create a MailBox
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MailBox we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MailBoxUpsertArgs>(args: SelectSubset<T, MailBoxUpsertArgs<ExtArgs>>): Prisma__MailBoxClient<$Result.GetResult<Prisma.$MailBoxPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MailBoxes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailBoxCountArgs} args - Arguments to filter MailBoxes to count.
+     * @example
+     * // Count the number of MailBoxes
+     * const count = await prisma.mailBox.count({
+     *   where: {
+     *     // ... the filter for the MailBoxes we want to count
+     *   }
+     * })
+    **/
+    count<T extends MailBoxCountArgs>(
+      args?: Subset<T, MailBoxCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MailBoxCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MailBox.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailBoxAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MailBoxAggregateArgs>(args: Subset<T, MailBoxAggregateArgs>): Prisma.PrismaPromise<GetMailBoxAggregateType<T>>
+
+    /**
+     * Group by MailBox.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MailBoxGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MailBoxGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MailBoxGroupByArgs['orderBy'] }
+        : { orderBy?: MailBoxGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MailBoxGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMailBoxGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MailBox model
+   */
+  readonly fields: MailBoxFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MailBox.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MailBoxClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MailBox model
+   */
+  interface MailBoxFieldRefs {
+    readonly id: FieldRef<"MailBox", 'String'>
+    readonly userId: FieldRef<"MailBox", 'String'>
+    readonly to: FieldRef<"MailBox", 'String'>
+    readonly subject: FieldRef<"MailBox", 'String'>
+    readonly body: FieldRef<"MailBox", 'String'>
+    readonly sentAt: FieldRef<"MailBox", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MailBox findUnique
+   */
+  export type MailBoxFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * Filter, which MailBox to fetch.
+     */
+    where: MailBoxWhereUniqueInput
+  }
+
+  /**
+   * MailBox findUniqueOrThrow
+   */
+  export type MailBoxFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * Filter, which MailBox to fetch.
+     */
+    where: MailBoxWhereUniqueInput
+  }
+
+  /**
+   * MailBox findFirst
+   */
+  export type MailBoxFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * Filter, which MailBox to fetch.
+     */
+    where?: MailBoxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MailBoxes to fetch.
+     */
+    orderBy?: MailBoxOrderByWithRelationInput | MailBoxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MailBoxes.
+     */
+    cursor?: MailBoxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MailBoxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MailBoxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MailBoxes.
+     */
+    distinct?: MailBoxScalarFieldEnum | MailBoxScalarFieldEnum[]
+  }
+
+  /**
+   * MailBox findFirstOrThrow
+   */
+  export type MailBoxFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * Filter, which MailBox to fetch.
+     */
+    where?: MailBoxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MailBoxes to fetch.
+     */
+    orderBy?: MailBoxOrderByWithRelationInput | MailBoxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MailBoxes.
+     */
+    cursor?: MailBoxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MailBoxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MailBoxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MailBoxes.
+     */
+    distinct?: MailBoxScalarFieldEnum | MailBoxScalarFieldEnum[]
+  }
+
+  /**
+   * MailBox findMany
+   */
+  export type MailBoxFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * Filter, which MailBoxes to fetch.
+     */
+    where?: MailBoxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MailBoxes to fetch.
+     */
+    orderBy?: MailBoxOrderByWithRelationInput | MailBoxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MailBoxes.
+     */
+    cursor?: MailBoxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MailBoxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MailBoxes.
+     */
+    skip?: number
+    distinct?: MailBoxScalarFieldEnum | MailBoxScalarFieldEnum[]
+  }
+
+  /**
+   * MailBox create
+   */
+  export type MailBoxCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * The data needed to create a MailBox.
+     */
+    data: XOR<MailBoxCreateInput, MailBoxUncheckedCreateInput>
+  }
+
+  /**
+   * MailBox createMany
+   */
+  export type MailBoxCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MailBoxes.
+     */
+    data: MailBoxCreateManyInput | MailBoxCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MailBox createManyAndReturn
+   */
+  export type MailBoxCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * The data used to create many MailBoxes.
+     */
+    data: MailBoxCreateManyInput | MailBoxCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MailBox update
+   */
+  export type MailBoxUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * The data needed to update a MailBox.
+     */
+    data: XOR<MailBoxUpdateInput, MailBoxUncheckedUpdateInput>
+    /**
+     * Choose, which MailBox to update.
+     */
+    where: MailBoxWhereUniqueInput
+  }
+
+  /**
+   * MailBox updateMany
+   */
+  export type MailBoxUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MailBoxes.
+     */
+    data: XOR<MailBoxUpdateManyMutationInput, MailBoxUncheckedUpdateManyInput>
+    /**
+     * Filter which MailBoxes to update
+     */
+    where?: MailBoxWhereInput
+    /**
+     * Limit how many MailBoxes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MailBox updateManyAndReturn
+   */
+  export type MailBoxUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * The data used to update MailBoxes.
+     */
+    data: XOR<MailBoxUpdateManyMutationInput, MailBoxUncheckedUpdateManyInput>
+    /**
+     * Filter which MailBoxes to update
+     */
+    where?: MailBoxWhereInput
+    /**
+     * Limit how many MailBoxes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MailBox upsert
+   */
+  export type MailBoxUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * The filter to search for the MailBox to update in case it exists.
+     */
+    where: MailBoxWhereUniqueInput
+    /**
+     * In case the MailBox found by the `where` argument doesn't exist, create a new MailBox with this data.
+     */
+    create: XOR<MailBoxCreateInput, MailBoxUncheckedCreateInput>
+    /**
+     * In case the MailBox was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MailBoxUpdateInput, MailBoxUncheckedUpdateInput>
+  }
+
+  /**
+   * MailBox delete
+   */
+  export type MailBoxDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+    /**
+     * Filter which MailBox to delete.
+     */
+    where: MailBoxWhereUniqueInput
+  }
+
+  /**
+   * MailBox deleteMany
+   */
+  export type MailBoxDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MailBoxes to delete
+     */
+    where?: MailBoxWhereInput
+    /**
+     * Limit how many MailBoxes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MailBox without action
+   */
+  export type MailBoxDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MailBox
+     */
+    select?: MailBoxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MailBox
+     */
+    omit?: MailBoxOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FailedJobs
+   */
+
+  export type AggregateFailedJobs = {
+    _count: FailedJobsCountAggregateOutputType | null
+    _min: FailedJobsMinAggregateOutputType | null
+    _max: FailedJobsMaxAggregateOutputType | null
+  }
+
+  export type FailedJobsMinAggregateOutputType = {
+    id: string | null
+    jobId: string | null
+    reason: string | null
+    failedAt: Date | null
+  }
+
+  export type FailedJobsMaxAggregateOutputType = {
+    id: string | null
+    jobId: string | null
+    reason: string | null
+    failedAt: Date | null
+  }
+
+  export type FailedJobsCountAggregateOutputType = {
+    id: number
+    jobId: number
+    payload: number
+    reason: number
+    failedAt: number
+    _all: number
+  }
+
+
+  export type FailedJobsMinAggregateInputType = {
+    id?: true
+    jobId?: true
+    reason?: true
+    failedAt?: true
+  }
+
+  export type FailedJobsMaxAggregateInputType = {
+    id?: true
+    jobId?: true
+    reason?: true
+    failedAt?: true
+  }
+
+  export type FailedJobsCountAggregateInputType = {
+    id?: true
+    jobId?: true
+    payload?: true
+    reason?: true
+    failedAt?: true
+    _all?: true
+  }
+
+  export type FailedJobsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FailedJobs to aggregate.
+     */
+    where?: FailedJobsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FailedJobs to fetch.
+     */
+    orderBy?: FailedJobsOrderByWithRelationInput | FailedJobsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FailedJobsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FailedJobs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FailedJobs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FailedJobs
+    **/
+    _count?: true | FailedJobsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FailedJobsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FailedJobsMaxAggregateInputType
+  }
+
+  export type GetFailedJobsAggregateType<T extends FailedJobsAggregateArgs> = {
+        [P in keyof T & keyof AggregateFailedJobs]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFailedJobs[P]>
+      : GetScalarType<T[P], AggregateFailedJobs[P]>
+  }
+
+
+
+
+  export type FailedJobsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FailedJobsWhereInput
+    orderBy?: FailedJobsOrderByWithAggregationInput | FailedJobsOrderByWithAggregationInput[]
+    by: FailedJobsScalarFieldEnum[] | FailedJobsScalarFieldEnum
+    having?: FailedJobsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FailedJobsCountAggregateInputType | true
+    _min?: FailedJobsMinAggregateInputType
+    _max?: FailedJobsMaxAggregateInputType
+  }
+
+  export type FailedJobsGroupByOutputType = {
+    id: string
+    jobId: string
+    payload: JsonValue
+    reason: string
+    failedAt: Date
+    _count: FailedJobsCountAggregateOutputType | null
+    _min: FailedJobsMinAggregateOutputType | null
+    _max: FailedJobsMaxAggregateOutputType | null
+  }
+
+  type GetFailedJobsGroupByPayload<T extends FailedJobsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FailedJobsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FailedJobsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FailedJobsGroupByOutputType[P]>
+            : GetScalarType<T[P], FailedJobsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FailedJobsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    jobId?: boolean
+    payload?: boolean
+    reason?: boolean
+    failedAt?: boolean
+  }, ExtArgs["result"]["failedJobs"]>
+
+  export type FailedJobsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    jobId?: boolean
+    payload?: boolean
+    reason?: boolean
+    failedAt?: boolean
+  }, ExtArgs["result"]["failedJobs"]>
+
+  export type FailedJobsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    jobId?: boolean
+    payload?: boolean
+    reason?: boolean
+    failedAt?: boolean
+  }, ExtArgs["result"]["failedJobs"]>
+
+  export type FailedJobsSelectScalar = {
+    id?: boolean
+    jobId?: boolean
+    payload?: boolean
+    reason?: boolean
+    failedAt?: boolean
+  }
+
+  export type FailedJobsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "jobId" | "payload" | "reason" | "failedAt", ExtArgs["result"]["failedJobs"]>
+
+  export type $FailedJobsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FailedJobs"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      jobId: string
+      payload: Prisma.JsonValue
+      reason: string
+      failedAt: Date
+    }, ExtArgs["result"]["failedJobs"]>
+    composites: {}
+  }
+
+  type FailedJobsGetPayload<S extends boolean | null | undefined | FailedJobsDefaultArgs> = $Result.GetResult<Prisma.$FailedJobsPayload, S>
+
+  type FailedJobsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FailedJobsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FailedJobsCountAggregateInputType | true
+    }
+
+  export interface FailedJobsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FailedJobs'], meta: { name: 'FailedJobs' } }
+    /**
+     * Find zero or one FailedJobs that matches the filter.
+     * @param {FailedJobsFindUniqueArgs} args - Arguments to find a FailedJobs
+     * @example
+     * // Get one FailedJobs
+     * const failedJobs = await prisma.failedJobs.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FailedJobsFindUniqueArgs>(args: SelectSubset<T, FailedJobsFindUniqueArgs<ExtArgs>>): Prisma__FailedJobsClient<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FailedJobs that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FailedJobsFindUniqueOrThrowArgs} args - Arguments to find a FailedJobs
+     * @example
+     * // Get one FailedJobs
+     * const failedJobs = await prisma.failedJobs.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FailedJobsFindUniqueOrThrowArgs>(args: SelectSubset<T, FailedJobsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FailedJobsClient<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FailedJobs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FailedJobsFindFirstArgs} args - Arguments to find a FailedJobs
+     * @example
+     * // Get one FailedJobs
+     * const failedJobs = await prisma.failedJobs.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FailedJobsFindFirstArgs>(args?: SelectSubset<T, FailedJobsFindFirstArgs<ExtArgs>>): Prisma__FailedJobsClient<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FailedJobs that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FailedJobsFindFirstOrThrowArgs} args - Arguments to find a FailedJobs
+     * @example
+     * // Get one FailedJobs
+     * const failedJobs = await prisma.failedJobs.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FailedJobsFindFirstOrThrowArgs>(args?: SelectSubset<T, FailedJobsFindFirstOrThrowArgs<ExtArgs>>): Prisma__FailedJobsClient<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FailedJobs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FailedJobsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FailedJobs
+     * const failedJobs = await prisma.failedJobs.findMany()
+     * 
+     * // Get first 10 FailedJobs
+     * const failedJobs = await prisma.failedJobs.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const failedJobsWithIdOnly = await prisma.failedJobs.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FailedJobsFindManyArgs>(args?: SelectSubset<T, FailedJobsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FailedJobs.
+     * @param {FailedJobsCreateArgs} args - Arguments to create a FailedJobs.
+     * @example
+     * // Create one FailedJobs
+     * const FailedJobs = await prisma.failedJobs.create({
+     *   data: {
+     *     // ... data to create a FailedJobs
+     *   }
+     * })
+     * 
+     */
+    create<T extends FailedJobsCreateArgs>(args: SelectSubset<T, FailedJobsCreateArgs<ExtArgs>>): Prisma__FailedJobsClient<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FailedJobs.
+     * @param {FailedJobsCreateManyArgs} args - Arguments to create many FailedJobs.
+     * @example
+     * // Create many FailedJobs
+     * const failedJobs = await prisma.failedJobs.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FailedJobsCreateManyArgs>(args?: SelectSubset<T, FailedJobsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FailedJobs and returns the data saved in the database.
+     * @param {FailedJobsCreateManyAndReturnArgs} args - Arguments to create many FailedJobs.
+     * @example
+     * // Create many FailedJobs
+     * const failedJobs = await prisma.failedJobs.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FailedJobs and only return the `id`
+     * const failedJobsWithIdOnly = await prisma.failedJobs.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FailedJobsCreateManyAndReturnArgs>(args?: SelectSubset<T, FailedJobsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FailedJobs.
+     * @param {FailedJobsDeleteArgs} args - Arguments to delete one FailedJobs.
+     * @example
+     * // Delete one FailedJobs
+     * const FailedJobs = await prisma.failedJobs.delete({
+     *   where: {
+     *     // ... filter to delete one FailedJobs
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FailedJobsDeleteArgs>(args: SelectSubset<T, FailedJobsDeleteArgs<ExtArgs>>): Prisma__FailedJobsClient<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FailedJobs.
+     * @param {FailedJobsUpdateArgs} args - Arguments to update one FailedJobs.
+     * @example
+     * // Update one FailedJobs
+     * const failedJobs = await prisma.failedJobs.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FailedJobsUpdateArgs>(args: SelectSubset<T, FailedJobsUpdateArgs<ExtArgs>>): Prisma__FailedJobsClient<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FailedJobs.
+     * @param {FailedJobsDeleteManyArgs} args - Arguments to filter FailedJobs to delete.
+     * @example
+     * // Delete a few FailedJobs
+     * const { count } = await prisma.failedJobs.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FailedJobsDeleteManyArgs>(args?: SelectSubset<T, FailedJobsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FailedJobs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FailedJobsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FailedJobs
+     * const failedJobs = await prisma.failedJobs.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FailedJobsUpdateManyArgs>(args: SelectSubset<T, FailedJobsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FailedJobs and returns the data updated in the database.
+     * @param {FailedJobsUpdateManyAndReturnArgs} args - Arguments to update many FailedJobs.
+     * @example
+     * // Update many FailedJobs
+     * const failedJobs = await prisma.failedJobs.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FailedJobs and only return the `id`
+     * const failedJobsWithIdOnly = await prisma.failedJobs.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FailedJobsUpdateManyAndReturnArgs>(args: SelectSubset<T, FailedJobsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FailedJobs.
+     * @param {FailedJobsUpsertArgs} args - Arguments to update or create a FailedJobs.
+     * @example
+     * // Update or create a FailedJobs
+     * const failedJobs = await prisma.failedJobs.upsert({
+     *   create: {
+     *     // ... data to create a FailedJobs
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FailedJobs we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FailedJobsUpsertArgs>(args: SelectSubset<T, FailedJobsUpsertArgs<ExtArgs>>): Prisma__FailedJobsClient<$Result.GetResult<Prisma.$FailedJobsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FailedJobs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FailedJobsCountArgs} args - Arguments to filter FailedJobs to count.
+     * @example
+     * // Count the number of FailedJobs
+     * const count = await prisma.failedJobs.count({
+     *   where: {
+     *     // ... the filter for the FailedJobs we want to count
+     *   }
+     * })
+    **/
+    count<T extends FailedJobsCountArgs>(
+      args?: Subset<T, FailedJobsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FailedJobsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FailedJobs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FailedJobsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FailedJobsAggregateArgs>(args: Subset<T, FailedJobsAggregateArgs>): Prisma.PrismaPromise<GetFailedJobsAggregateType<T>>
+
+    /**
+     * Group by FailedJobs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FailedJobsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FailedJobsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FailedJobsGroupByArgs['orderBy'] }
+        : { orderBy?: FailedJobsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FailedJobsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFailedJobsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FailedJobs model
+   */
+  readonly fields: FailedJobsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FailedJobs.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FailedJobsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FailedJobs model
+   */
+  interface FailedJobsFieldRefs {
+    readonly id: FieldRef<"FailedJobs", 'String'>
+    readonly jobId: FieldRef<"FailedJobs", 'String'>
+    readonly payload: FieldRef<"FailedJobs", 'Json'>
+    readonly reason: FieldRef<"FailedJobs", 'String'>
+    readonly failedAt: FieldRef<"FailedJobs", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FailedJobs findUnique
+   */
+  export type FailedJobsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * Filter, which FailedJobs to fetch.
+     */
+    where: FailedJobsWhereUniqueInput
+  }
+
+  /**
+   * FailedJobs findUniqueOrThrow
+   */
+  export type FailedJobsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * Filter, which FailedJobs to fetch.
+     */
+    where: FailedJobsWhereUniqueInput
+  }
+
+  /**
+   * FailedJobs findFirst
+   */
+  export type FailedJobsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * Filter, which FailedJobs to fetch.
+     */
+    where?: FailedJobsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FailedJobs to fetch.
+     */
+    orderBy?: FailedJobsOrderByWithRelationInput | FailedJobsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FailedJobs.
+     */
+    cursor?: FailedJobsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FailedJobs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FailedJobs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FailedJobs.
+     */
+    distinct?: FailedJobsScalarFieldEnum | FailedJobsScalarFieldEnum[]
+  }
+
+  /**
+   * FailedJobs findFirstOrThrow
+   */
+  export type FailedJobsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * Filter, which FailedJobs to fetch.
+     */
+    where?: FailedJobsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FailedJobs to fetch.
+     */
+    orderBy?: FailedJobsOrderByWithRelationInput | FailedJobsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FailedJobs.
+     */
+    cursor?: FailedJobsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FailedJobs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FailedJobs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FailedJobs.
+     */
+    distinct?: FailedJobsScalarFieldEnum | FailedJobsScalarFieldEnum[]
+  }
+
+  /**
+   * FailedJobs findMany
+   */
+  export type FailedJobsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * Filter, which FailedJobs to fetch.
+     */
+    where?: FailedJobsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FailedJobs to fetch.
+     */
+    orderBy?: FailedJobsOrderByWithRelationInput | FailedJobsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FailedJobs.
+     */
+    cursor?: FailedJobsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FailedJobs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FailedJobs.
+     */
+    skip?: number
+    distinct?: FailedJobsScalarFieldEnum | FailedJobsScalarFieldEnum[]
+  }
+
+  /**
+   * FailedJobs create
+   */
+  export type FailedJobsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FailedJobs.
+     */
+    data: XOR<FailedJobsCreateInput, FailedJobsUncheckedCreateInput>
+  }
+
+  /**
+   * FailedJobs createMany
+   */
+  export type FailedJobsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FailedJobs.
+     */
+    data: FailedJobsCreateManyInput | FailedJobsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FailedJobs createManyAndReturn
+   */
+  export type FailedJobsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * The data used to create many FailedJobs.
+     */
+    data: FailedJobsCreateManyInput | FailedJobsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FailedJobs update
+   */
+  export type FailedJobsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FailedJobs.
+     */
+    data: XOR<FailedJobsUpdateInput, FailedJobsUncheckedUpdateInput>
+    /**
+     * Choose, which FailedJobs to update.
+     */
+    where: FailedJobsWhereUniqueInput
+  }
+
+  /**
+   * FailedJobs updateMany
+   */
+  export type FailedJobsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FailedJobs.
+     */
+    data: XOR<FailedJobsUpdateManyMutationInput, FailedJobsUncheckedUpdateManyInput>
+    /**
+     * Filter which FailedJobs to update
+     */
+    where?: FailedJobsWhereInput
+    /**
+     * Limit how many FailedJobs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FailedJobs updateManyAndReturn
+   */
+  export type FailedJobsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * The data used to update FailedJobs.
+     */
+    data: XOR<FailedJobsUpdateManyMutationInput, FailedJobsUncheckedUpdateManyInput>
+    /**
+     * Filter which FailedJobs to update
+     */
+    where?: FailedJobsWhereInput
+    /**
+     * Limit how many FailedJobs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FailedJobs upsert
+   */
+  export type FailedJobsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FailedJobs to update in case it exists.
+     */
+    where: FailedJobsWhereUniqueInput
+    /**
+     * In case the FailedJobs found by the `where` argument doesn't exist, create a new FailedJobs with this data.
+     */
+    create: XOR<FailedJobsCreateInput, FailedJobsUncheckedCreateInput>
+    /**
+     * In case the FailedJobs was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FailedJobsUpdateInput, FailedJobsUncheckedUpdateInput>
+  }
+
+  /**
+   * FailedJobs delete
+   */
+  export type FailedJobsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+    /**
+     * Filter which FailedJobs to delete.
+     */
+    where: FailedJobsWhereUniqueInput
+  }
+
+  /**
+   * FailedJobs deleteMany
+   */
+  export type FailedJobsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FailedJobs to delete
+     */
+    where?: FailedJobsWhereInput
+    /**
+     * Limit how many FailedJobs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FailedJobs without action
+   */
+  export type FailedJobsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FailedJobs
+     */
+    select?: FailedJobsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FailedJobs
+     */
+    omit?: FailedJobsOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4153,6 +6334,29 @@ export namespace Prisma {
   export type RegistrationsScalarFieldEnum = (typeof RegistrationsScalarFieldEnum)[keyof typeof RegistrationsScalarFieldEnum]
 
 
+  export const MailBoxScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    to: 'to',
+    subject: 'subject',
+    body: 'body',
+    sentAt: 'sentAt'
+  };
+
+  export type MailBoxScalarFieldEnum = (typeof MailBoxScalarFieldEnum)[keyof typeof MailBoxScalarFieldEnum]
+
+
+  export const FailedJobsScalarFieldEnum: {
+    id: 'id',
+    jobId: 'jobId',
+    payload: 'payload',
+    reason: 'reason',
+    failedAt: 'failedAt'
+  };
+
+  export type FailedJobsScalarFieldEnum = (typeof FailedJobsScalarFieldEnum)[keyof typeof FailedJobsScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -4161,12 +6365,28 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -4227,6 +6447,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -4416,6 +6650,115 @@ export namespace Prisma {
     registeredAt?: DateTimeWithAggregatesFilter<"Registrations"> | Date | string
   }
 
+  export type MailBoxWhereInput = {
+    AND?: MailBoxWhereInput | MailBoxWhereInput[]
+    OR?: MailBoxWhereInput[]
+    NOT?: MailBoxWhereInput | MailBoxWhereInput[]
+    id?: StringFilter<"MailBox"> | string
+    userId?: StringFilter<"MailBox"> | string
+    to?: StringFilter<"MailBox"> | string
+    subject?: StringFilter<"MailBox"> | string
+    body?: StringFilter<"MailBox"> | string
+    sentAt?: DateTimeFilter<"MailBox"> | Date | string
+  }
+
+  export type MailBoxOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    to?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    sentAt?: SortOrder
+  }
+
+  export type MailBoxWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MailBoxWhereInput | MailBoxWhereInput[]
+    OR?: MailBoxWhereInput[]
+    NOT?: MailBoxWhereInput | MailBoxWhereInput[]
+    userId?: StringFilter<"MailBox"> | string
+    to?: StringFilter<"MailBox"> | string
+    subject?: StringFilter<"MailBox"> | string
+    body?: StringFilter<"MailBox"> | string
+    sentAt?: DateTimeFilter<"MailBox"> | Date | string
+  }, "id">
+
+  export type MailBoxOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    to?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    sentAt?: SortOrder
+    _count?: MailBoxCountOrderByAggregateInput
+    _max?: MailBoxMaxOrderByAggregateInput
+    _min?: MailBoxMinOrderByAggregateInput
+  }
+
+  export type MailBoxScalarWhereWithAggregatesInput = {
+    AND?: MailBoxScalarWhereWithAggregatesInput | MailBoxScalarWhereWithAggregatesInput[]
+    OR?: MailBoxScalarWhereWithAggregatesInput[]
+    NOT?: MailBoxScalarWhereWithAggregatesInput | MailBoxScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MailBox"> | string
+    userId?: StringWithAggregatesFilter<"MailBox"> | string
+    to?: StringWithAggregatesFilter<"MailBox"> | string
+    subject?: StringWithAggregatesFilter<"MailBox"> | string
+    body?: StringWithAggregatesFilter<"MailBox"> | string
+    sentAt?: DateTimeWithAggregatesFilter<"MailBox"> | Date | string
+  }
+
+  export type FailedJobsWhereInput = {
+    AND?: FailedJobsWhereInput | FailedJobsWhereInput[]
+    OR?: FailedJobsWhereInput[]
+    NOT?: FailedJobsWhereInput | FailedJobsWhereInput[]
+    id?: StringFilter<"FailedJobs"> | string
+    jobId?: StringFilter<"FailedJobs"> | string
+    payload?: JsonFilter<"FailedJobs">
+    reason?: StringFilter<"FailedJobs"> | string
+    failedAt?: DateTimeFilter<"FailedJobs"> | Date | string
+  }
+
+  export type FailedJobsOrderByWithRelationInput = {
+    id?: SortOrder
+    jobId?: SortOrder
+    payload?: SortOrder
+    reason?: SortOrder
+    failedAt?: SortOrder
+  }
+
+  export type FailedJobsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FailedJobsWhereInput | FailedJobsWhereInput[]
+    OR?: FailedJobsWhereInput[]
+    NOT?: FailedJobsWhereInput | FailedJobsWhereInput[]
+    jobId?: StringFilter<"FailedJobs"> | string
+    payload?: JsonFilter<"FailedJobs">
+    reason?: StringFilter<"FailedJobs"> | string
+    failedAt?: DateTimeFilter<"FailedJobs"> | Date | string
+  }, "id">
+
+  export type FailedJobsOrderByWithAggregationInput = {
+    id?: SortOrder
+    jobId?: SortOrder
+    payload?: SortOrder
+    reason?: SortOrder
+    failedAt?: SortOrder
+    _count?: FailedJobsCountOrderByAggregateInput
+    _max?: FailedJobsMaxOrderByAggregateInput
+    _min?: FailedJobsMinOrderByAggregateInput
+  }
+
+  export type FailedJobsScalarWhereWithAggregatesInput = {
+    AND?: FailedJobsScalarWhereWithAggregatesInput | FailedJobsScalarWhereWithAggregatesInput[]
+    OR?: FailedJobsScalarWhereWithAggregatesInput[]
+    NOT?: FailedJobsScalarWhereWithAggregatesInput | FailedJobsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FailedJobs"> | string
+    jobId?: StringWithAggregatesFilter<"FailedJobs"> | string
+    payload?: JsonWithAggregatesFilter<"FailedJobs">
+    reason?: StringWithAggregatesFilter<"FailedJobs"> | string
+    failedAt?: DateTimeWithAggregatesFilter<"FailedJobs"> | Date | string
+  }
+
   export type UserCreateInput = {
     userId?: string
     email: string
@@ -4596,6 +6939,125 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     competitionId?: StringFieldUpdateOperationsInput | string
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MailBoxCreateInput = {
+    id?: string
+    userId: string
+    to: string
+    subject: string
+    body: string
+    sentAt?: Date | string
+  }
+
+  export type MailBoxUncheckedCreateInput = {
+    id?: string
+    userId: string
+    to: string
+    subject: string
+    body: string
+    sentAt?: Date | string
+  }
+
+  export type MailBoxUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    to?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MailBoxUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    to?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MailBoxCreateManyInput = {
+    id?: string
+    userId: string
+    to: string
+    subject: string
+    body: string
+    sentAt?: Date | string
+  }
+
+  export type MailBoxUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    to?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MailBoxUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    to?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    sentAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FailedJobsCreateInput = {
+    id?: string
+    jobId: string
+    payload: JsonNullValueInput | InputJsonValue
+    reason: string
+    failedAt?: Date | string
+  }
+
+  export type FailedJobsUncheckedCreateInput = {
+    id?: string
+    jobId: string
+    payload: JsonNullValueInput | InputJsonValue
+    reason: string
+    failedAt?: Date | string
+  }
+
+  export type FailedJobsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    jobId?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    reason?: StringFieldUpdateOperationsInput | string
+    failedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FailedJobsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    jobId?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    reason?: StringFieldUpdateOperationsInput | string
+    failedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FailedJobsCreateManyInput = {
+    id?: string
+    jobId: string
+    payload: JsonNullValueInput | InputJsonValue
+    reason: string
+    failedAt?: Date | string
+  }
+
+  export type FailedJobsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    jobId?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    reason?: StringFieldUpdateOperationsInput | string
+    failedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FailedJobsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    jobId?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    reason?: StringFieldUpdateOperationsInput | string
+    failedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -4799,6 +7261,104 @@ export namespace Prisma {
     registeredAt?: SortOrder
   }
 
+  export type MailBoxCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    to?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    sentAt?: SortOrder
+  }
+
+  export type MailBoxMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    to?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    sentAt?: SortOrder
+  }
+
+  export type MailBoxMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    to?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    sentAt?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type FailedJobsCountOrderByAggregateInput = {
+    id?: SortOrder
+    jobId?: SortOrder
+    payload?: SortOrder
+    reason?: SortOrder
+    failedAt?: SortOrder
+  }
+
+  export type FailedJobsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    jobId?: SortOrder
+    reason?: SortOrder
+    failedAt?: SortOrder
+  }
+
+  export type FailedJobsMinOrderByAggregateInput = {
+    id?: SortOrder
+    jobId?: SortOrder
+    reason?: SortOrder
+    failedAt?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -4937,6 +7497,29 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
 
