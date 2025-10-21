@@ -13,6 +13,7 @@ export class CreateUserDTO {
     @IsString()
     @IsEmail()
     @IsNotEmpty()
+    @Matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
     readonly email: string;
 
     @IsString()

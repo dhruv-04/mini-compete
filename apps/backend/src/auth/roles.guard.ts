@@ -1,12 +1,10 @@
 import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, ForbiddenException } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
-import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class RolesGuard implements CanActivate {
     constructor(
         private reflector: Reflector,
-        private readonly jwt: JwtService
     ) {}
 
     canActivate(context: ExecutionContext): boolean  {
@@ -17,24 +15,12 @@ export class RolesGuard implements CanActivate {
         }
 
         const request = context.switchToHttp().getRequest();
-        const authHeader = request.headers['authorization'];
 
-        //check for existance token
-        if(!authHeader) {
-            throw new UnauthorizedException('No Token provided.');
+        if(!request.user) {
+            throw new ForbiddenException(`Unauthorized Access.`)
         }
 
-        const token = authHeader.split(' ')[1];
-        if(!token) {
-            throw new UnauthorizedException('Invalid token format');
-        }
-
-        //verfiy token through jwt
-        const user = this.jwt.verify(token);
-        
-        request.user = user;
-
-        const hasRole = requiredRoles.some((role) => user.role === role);
+        const hasRole = requiredRoles.some((role) => request.user.role === role);
         if(hasRole) {
             return true;
         }

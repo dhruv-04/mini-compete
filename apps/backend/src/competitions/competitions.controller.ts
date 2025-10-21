@@ -3,9 +3,10 @@ import { CompetitionsServices } from "./competitions.service";
 import { CreateCompetitionDTO } from "./competitionsDto/createCompetitions.dto";
 import { Roles } from "src/auth/roles.decorator";
 import { RolesGuard } from "src/auth/roles.guard";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('competitions')
-@UseGuards(RolesGuard)
+@UseGuards(AuthGuard('jwt'), RolesGuard)
 export class CompetitionsController {
     constructor(private readonly competitionServices: CompetitionsServices) {};
 
@@ -16,7 +17,7 @@ export class CompetitionsController {
     }
 
     @Post(':id/register')
-    // @Roles('participant')
+    @Roles('participant')
     async register(@Request() req, @Body() Body, @Param('id') competitionId: string, @Headers('idempotency-key') idempotencyKey: string) {
         console.log(`CompetitionId is : ${competitionId}`)
         return this.competitionServices.registerForCompetition(idempotencyKey  ,competitionId , req.userId);

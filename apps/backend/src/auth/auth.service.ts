@@ -33,12 +33,14 @@ export class AuthService {
             },
             select: {
                 userId: true,
-                role: true
+                role: true,
+                email: true,
+                name: true,
             }
         });
 
         //create payload
-        const payload = { userId: user.userId, role: user.role };
+        const payload = { userId: user.userId, role: user.role, email: user.email, name: user.name };
         //create token
         const token = this.jwtService.sign(payload, { expiresIn: '1h' });
 
@@ -51,7 +53,7 @@ export class AuthService {
         //query for user email and password
         const existingUser = await this.prisma.user.findUnique({ 
             where: { email: loginUser.email },
-            select: { email: true, password: true, userId: true, role: true }
+            select: { email: true, password: true, userId: true, role: true, name: true }
         });
 
         //throw error if user does not exist
@@ -68,7 +70,7 @@ export class AuthService {
         }
 
         //proceed with generating the token if nothing happens usig JWT
-        const payload = { role: existingUser.role, userId: existingUser.userId };
+        const payload = { role: existingUser.role, userId: existingUser.userId, email: existingUser.email, name: existingUser.name };
         const token = this.jwtService.sign(payload, { expiresIn: '1h'});
         // const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
         console.log(`[AuthLogin] Valid credentails at [${new Date().toISOString()}] for user : ${existingUser.userId}`);
