@@ -34,8 +34,8 @@ import { ScheduleModule } from '@nestjs/schedule';
       useFactory: async (configService: ConfigService) => {
         return {
             connection: {
-            host: configService.get<string>('REDIS_HOST'),
-            port: configService.get<number>('REDIS_PORT'),
+            host: configService.get<string>('REDIS_HOST') ?? '127.0.0.1',
+            port: configService.get<number>('REDIS_PORT') ?? 6379,
           }
         };
       },

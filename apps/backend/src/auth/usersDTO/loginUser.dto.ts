@@ -1,11 +1,6 @@
 import { IsEmail, IsNotEmpty, isString, IsString, Matches } from 'class-validator';
 
-enum Role {
-    PARTICIPANT = 'participant',
-    ORGANIZER = 'organizer'
-}
-
-export class LoginUser {
+export class LoginUserDTO {
     @IsString()
     @IsNotEmpty()
     @IsEmail()

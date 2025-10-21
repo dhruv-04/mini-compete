@@ -5,7 +5,7 @@ enum Role {
     ORGANIZER = 'organizer'
 }
 
-export class CreateUser {
+export class CreateUserDTO {
     @IsString()
     @IsNotEmpty()
     readonly name: string;
