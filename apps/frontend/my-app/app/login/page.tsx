@@ -62,7 +62,7 @@ export default function LoginPage() {
 
       if (accessToken) {
         localStorage.setItem('accessToken', accessToken);
-        router.push('/');
+        router.push('/dashboard');
       }
 
     } catch (error: any) {

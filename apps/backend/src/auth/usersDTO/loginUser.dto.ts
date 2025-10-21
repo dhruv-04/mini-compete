@@ -4,6 +4,7 @@ export class LoginUserDTO {
     @IsString()
     @IsNotEmpty()
     @IsEmail()
+    @Matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
     readonly email: string;
 
     @IsString()
