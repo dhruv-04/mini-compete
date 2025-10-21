@@ -15,9 +15,10 @@ export class CompetitionsController {
         return this.competitionServices.createCompetitions(createCompetitionDto);
     }
 
-    // @Post(':id/register')
+    @Post(':id/register')
     // @Roles('participant')
-    // async register(@Request() req, @Body() Body, @Param(':id') id:string, @Headers('idempotency-key') idempotencyKey: string) {
-    //     return this.competitionServices.registerForCompetition(req.email, idempotencyKey  ,id , req.userId);
-    // }
+    async register(@Request() req, @Body() Body, @Param('id') competitionId: string, @Headers('idempotency-key') idempotencyKey: string) {
+        console.log(`CompetitionId is : ${competitionId}`)
+        return this.competitionServices.registerForCompetition(idempotencyKey  ,competitionId , req.userId);
+    }
 };
