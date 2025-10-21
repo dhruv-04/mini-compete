@@ -1,13 +1,14 @@
-import { ConflictException, ForbiddenException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { BadRequestException, ConflictException, ForbiddenException, HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CreateCompetitionDTO } from "./competitionsDto/createCompetitions.dto"; 
-// import type { Cache } from 'cache-manager';
-// import { CACHE_MANAGER } from "@nestjs/cache-manager";
+import type { Cache } from 'cache-manager';
+import { CACHE_MANAGER } from "@nestjs/cache-manager";
+import { error } from "console";
 
 @Injectable()
 export class CompetitionsServices {
     constructor(private readonly prisma: PrismaService, 
-        // @Inject(CACHE_MANAGER) private readonly cacheManager: Cache
+        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache
     ) {}
 
     async createCompetitions(createCompetition: CreateCompetitionDTO) {
@@ -36,62 +37,70 @@ export class CompetitionsServices {
     }
 
 
-    // //concurrency possible
-    // async registerForCompetition(email: string, idempotencyKey: string, competitionId: string, userId: string) {
-    //     //idempotency verification
-    //     console.log(`Request for registration by ${email} at ${new Date().toISOString()} for competition ${competitionId}`);
-    //     const cacheIdempotency = await this.cacheManager.get<string>(`idempotency:${idempotencyKey}`);
-    //     if(cacheIdempotency) {
-    //         console.log(`Idempotency key conflict by user ${idempotencyKey} at ${new Date().toISOString()}`);
-    //         throw new ConflictException('Request already in progress.');
-    //     }
+    //concurrency possible
+    async registerForCompetition(idempotencyKey: string, competitionId: string, userId: string) {
+        //check if the competitionId even exist
+        const competition = await this.prisma.competitions.findUniqueOrThrow({
+            where: { competitionId: competitionId },
+            select: {
+                competitionId:true,
+            }
+        });
 
-    //     //if idempotency key doesn't exist in redis
-    //     if(!cacheIdempotency) {
-    //         try {
-    //                 await this.cacheManager.set(`indempotency:${idempotencyKey}`, userId, 3600);
-    //                 console.log(`Idempotency key added to Redis for user ${userId} registration request at ${new Date().toISOString()}`)
-    //         } catch (err) {
-    //             throw new err;
-    //         }
-    //     }
+        //idempotency verification
+        console.log(`Request for registration by ${userId} at ${new Date().toISOString()} for competition ${competitionId}`);
+        const cacheIdempotency = await this.cacheManager.get<string>(`idempotency:${idempotencyKey}`);
+        if(cacheIdempotency) {
+            console.log(`Idempotency key conflict by user ${idempotencyKey} at ${new Date().toISOString()}`);
+            throw new ConflictException('Request already in progress.');
+        }
 
-    //     //TODO: Add code for registration
-    //     const registration = await this.prisma.$transaction(async (tx) => {
+        //if idempotency key doesn't exist in redis
+        if(!cacheIdempotency) {
+            try {
+                    await this.cacheManager.set(`indempotency:${idempotencyKey}`, userId, 3600);
+                    console.log(`Idempotency key added to Redis for user ${userId} registration request at ${new Date().toISOString()}`)
+            } catch (err) {
+                throw new err;
+            }
+        }
 
-    //         //query the registeredCount and regDeadline from Competition table
-    //         const [competition] = await tx.$queryRaw<{ capacity: number; regDeadline: Date; registeredCount: number }[]>`SELECT capacity, regDeadline, registeredCount FROM "Competitions" WHERE "competitionId" = ${competitionId} FOR UPDATE`;
+        //TODO: Add code for registration
+        const registration = await this.prisma.$transaction(async (tx) => {
 
-    //         //checking for registration Deadlin
-    //         if(new Date() > competition.regDeadline) {
-    //             throw new ForbiddenException('The registration deadline for the competition is over.');
-    //         }
+            //query the registeredCount and regDeadline from Competition table
+            const [competition] = await tx.$queryRaw<{ capacity: number; regDeadline: Date; registeredCount: number }[]>`SELECT capacity, "regDeadLine", "registeredCount" FROM "Competitions" WHERE "competitionId" = ${competitionId} FOR UPDATE`;
 
-    //         if(competition.registeredCount == competition.capacity) {
-    //             throw new ConflictException('The number of participants has reached the maximum capacity.')
-    //         }
+            //checking for registration Deadlin
+            if(new Date() > competition.regDeadline) {
+                throw new ForbiddenException('The registration deadline for the competition is over.');
+            }
 
-    //         await tx.competitions.update({
-    //             where: {
-    //                 competitionId: competitionId
-    //             },
-    //             data: {
-    //                 registeredCount: { increment: 1}
-    //             }
-    //         });
+            if(competition.registeredCount == competition.capacity) {
+                throw new ConflictException('The number of participants has reached the maximum capacity.')
+            }
 
-    //         const registrationId = await tx.registrations.create({
-    //             data: {
-    //                 userId: userId,
-    //                 competitionId: competitionId
-    //             },
-    //             select: {
-    //                 registrationID: true
-    //             }
-    //         });
+            await tx.competitions.update({
+                where: {
+                    competitionId: competitionId
+                },
+                data: {
+                    registeredCount: { increment: 1}
+                }
+            });
 
-    //         return { message: "Registration successful!", registrationId: registrationId};
+            const registrationId = await tx.registrations.create({
+                data: {
+                    userId: userId,
+                    competitionId: competitionId
+                },
+                select: {
+                    registrationID: true
+                }
+            });
 
-    //     });
-    // }
+            return { message: "Registration successful!", registrationId: registrationId};
+
+        });
+    }
 };

@@ -1,10 +1,13 @@
 import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, ForbiddenException } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
-import { Observable } from "rxjs";
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-    constructor(private reflector: Reflector) {}
+    constructor(
+        private reflector: Reflector,
+        private readonly jwt: JwtService
+    ) {}
 
     canActivate(context: ExecutionContext): boolean  {
         const requiredRoles = this.reflector.get<string[]>('roles', context.getHandler());
@@ -27,7 +30,7 @@ export class RolesGuard implements CanActivate {
         }
 
         //verfiy token through jwt
-        const user = { userId: "johdoe@gmail.com", role: 'organizer'};
+        const user = this.jwt.verify(token);
         
         request.user = user;
 

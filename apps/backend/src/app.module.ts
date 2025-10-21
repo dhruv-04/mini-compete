@@ -18,6 +18,7 @@ import { CompetitionModule } from './competitions/competitions.module';
     CacheModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
+      isGlobal: true,
       useFactory: async (configService: ConfigService) => ({
         store: await redisStore({
           socket: {
