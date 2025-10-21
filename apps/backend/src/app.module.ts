@@ -7,7 +7,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { redisStore } from 'cache-manager-redis-store'
 import { CacheModule } from '@nestjs/cache-manager';
 import { BullModule } from "@nestjs/bullmq";
-import { ScheduleModule } from '@nestjs/schedule';
+import { CompetitionModule } from './competitions/competitions.module';
  
 @Module({
   imports: [
@@ -40,9 +40,9 @@ import { ScheduleModule } from '@nestjs/schedule';
         };
       },
     }),
-    ScheduleModule.forRoot(),
     PrismaModule,
     AuthModule,
+    CompetitionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
