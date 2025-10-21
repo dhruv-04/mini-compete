@@ -19,12 +19,20 @@ enum UserRole {
   organizer
 }
 
+enum RegistrationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
 model User {
   userId String @id @default(uuid())
   email String @unique
   name String 
   password String
   role UserRole
+  createdAt DateTime @default(now())
+  registrations Registrations[]
 }
 
 model Competitions {
@@ -35,13 +43,18 @@ model Competitions {
   capacity Int
   registeredCount Int @default(0)
   regDeadLine DateTime
+  startDate DateTime
   createdAt DateTime @default(now())
+  registrations Registrations[]
 }
 
 model Registrations {
   registrationID String @id @default(uuid())
   userId String 
+  user User @relation(fields: [userId], references: [userId])
   competitionId String
+  competition Competitions @relation(fields: [competitionId], references: [competitionId])
+  registrationStatus RegistrationStatus @default(PENDING)
   registeredAt DateTime @default(now())
   @@unique([userId, competitionId])
 }

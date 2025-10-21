@@ -1,100 +1,89 @@
-import { PrismaClient, UserRole } from '../src/generated/prisma'; 
-import * as bcrypt from 'bcrypt';
+import { PrismaClient, UserRole, RegistrationStatus } from '../src/generated/prisma';
+import { hash } from 'bcrypt';
 
 const prisma = new PrismaClient();
+
+// Helper function to create dates for competitions
+const getCompetitionDate = (daysInFuture: number): Date => {
+  const date = new Date();
+  date.setDate(date.getDate() + daysInFuture);
+  return date;
+};
 
 async function main() {
   console.log('Start seeding...');
 
-  const hashedPassword = await bcrypt.hash('password123', 10);
+  // --- 1. Cleanup existing data (Optional, but recommended for consistent seeding) ---
+  await prisma.registrations.deleteMany();
+  await prisma.competitions.deleteMany();
+  await prisma.mailBox.deleteMany();
+  await prisma.failedJobs.deleteMany();
+  await prisma.user.deleteMany();
 
-  // --- Create Organizers (2) ---
-  const org1 = await prisma.user.create({
-    data: {
-      email: 'organizer1@test.com',
-      name: 'Organizer One',
-      password: hashedPassword,
-      role: UserRole.organizer,
-    },
-  });
+  // The password 'password123' will be hashed
+  const hashedPassword = await hash('password123', 10);
 
-  const org2 = await prisma.user.create({
-    data: {
-      email: 'organizer2@test.com',
-      name: 'Organizer Two',
-      password: hashedPassword,
-      role: UserRole.organizer,
-    },
-  });
-  console.log('Created 2 Organizers');
+  // --- 2. Seed Users (2 Organizers + 5 Participants) ---
+  const organizerData = [
+    { email: 'alice@organize.com', name: 'Alice Organizer', role: UserRole.organizer, password: hashedPassword },
+    { email: 'bob@organize.com', name: 'Bob Organizer', role: UserRole.organizer, password: hashedPassword },
+  ];
 
-  // --- Create Participants (5) ---
-  for (let i = 1; i <= 5; i++) {
-    await prisma.user.create({
-      data: {
-        email: `participant${i}@test.com`,
-        name: `Participant ${i}`,
-        password: hashedPassword,
-        role: UserRole.participant,
-      },
-    });
+  const participantData = [
+    { email: 'user1@test.com', name: 'Charlie Participant', role: UserRole.participant, password: hashedPassword },
+    { email: 'user2@test.com', name: 'Dana Participant', role: UserRole.participant, password: hashedPassword },
+    { email: 'user3@test.com', name: 'Ethan Participant', role: UserRole.participant, password: hashedPassword },
+    { email: 'user4@test.com', name: 'Fiona Participant', role: UserRole.participant, password: hashedPassword },
+    { email: 'user5@test.com', name: 'George Participant', role: UserRole.participant, password: hashedPassword },
+  ];
+
+  const allUsers = [...organizerData, ...participantData];
+
+  // const users = [];
+  for (const userData of allUsers) {
+    const user = await prisma.user.create({ data: userData });
+    // users.push(user);
   }
-  console.log('Created 5 Participants');
 
-  // --- Create Competitions (5) ---
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  // const participants = users.slice(2); // The 5 participant users
 
-  const nextWeek = new Date();
-  nextWeek.setDate(nextWeek.getDate() + 7);
+  // console.log(`Seeded ${users.length} users.`);
+  // 
 
-  // You are generating IDs in the service, but for seeds, we can let Prisma do it
-  // IF you change your schema to @default(uuid()).
-  // SINCE YOU ARE NOT, we must provide them.
-  
-  // Note: Your schema requires you to provide the competitionId.
-  // It's easier to let Prisma do it. Change your schema to:
-  // competitionId String @id @default(uuid())
+  // --- 3. Seed 5 Competitions ---
+  const competitionTitles = [
+    'Web Development Hackathon',
+    'AI & ML Data Challenge',
+    'Mobile App UI/UX Contest',
+    'Cloud Architecture Design',
+    'Backend API Performance Race',
+  ];
 
-  await prisma.competitions.create({
-    data: {
-      competitionId: "1234",
-      title: 'Global Coding Challenge',
-      description: 'A 24-hour hackathon for all skill levels.',
-      tags: ['coding', 'hackathon', 'global'],
-      capacity: 100,
-      regDeadLine: tomorrow, // Registration closes tomorrow
-    },
-  });
+  const competitionData = competitionTitles.map((title, index) => ({
+    title: title,
+    description: `A challenging competition for ${title}`,
+    tags: ['Tech', 'Coding', 'Innovation'],
+    capacity: 100,
+    regDeadLine: getCompetitionDate(5 + index),  // 5 to 9 days from now
+    startDate: getCompetitionDate(10 + index),    // 10 to 14 days from now
+  }));
 
-  await prisma.competitions.create({
-    data: {
-      competitionId: "1235",
-      title: 'Design Sprint 2025',
-      description: 'Solve real-world problems with design thinking.',
-      tags: ['design', 'ui/ux'],
-      capacity: 50,
-      regDeadLine: nextWeek, // Registration closes next week
-    },
-  });
+  const competitions = [];
+  for (const data of competitionData) {
+    const competition = await prisma.competitions.create({ data });
+    // competitions.push(competition);
+  }
 
-  // Add 3 more simple competitions
-  await prisma.competitions.create({ data: { competitionId: "1237", title: 'Quick SQL', description: 'A 24-hour hackathon for all skill levels.', capacity: 20, regDeadLine: tomorrow, tags: [] } });
-  await prisma.competitions.create({ data: { competitionId: "1236", title: 'Algo Marathon', description: 'A 24-hour hackathon for all skill levels.', capacity: 50, regDeadLine: nextWeek, tags: ['algo'] } });
-  await prisma.competitions.create({ data: { competitionId: "1238", title: 'CSS Battle', description: 'A 24-hour hackathon for all skill levels.', capacity: 30, regDeadLine: tomorrow, tags: ['css', 'frontend'] } });
-
-  console.log('Created 5 Competitions');
-
+  // console.log(`Seeded ${competitions.length} competitions.`);
   console.log('Seeding finished.');
 }
 
-// Run the seed script
+// --- Error Handling and Disconnection ---
 main()
   .catch((e) => {
     console.error(e);
     process.exit(1);
   })
   .finally(async () => {
-    // Close the Prisma Client connection
     await prisma.$disconnect();
   });

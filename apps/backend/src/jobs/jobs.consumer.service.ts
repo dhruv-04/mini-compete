@@ -1,7 +1,6 @@
 import { Processor, OnQueueEvent } from "@nestjs/bullmq";
 import { PrismaService } from "src/prisma/prisma.service";
 import { Job } from "bullmq";
-import { timestamp } from "rxjs";
 
 interface ConfirmationPayload {
     userId: string;

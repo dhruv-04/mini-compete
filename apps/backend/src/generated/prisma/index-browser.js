@@ -125,7 +125,8 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   name: 'name',
   password: 'password',
-  role: 'role'
+  role: 'role',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.CompetitionsScalarFieldEnum = {
@@ -136,6 +137,7 @@ exports.Prisma.CompetitionsScalarFieldEnum = {
   capacity: 'capacity',
   registeredCount: 'registeredCount',
   regDeadLine: 'regDeadLine',
+  startDate: 'startDate',
   createdAt: 'createdAt'
 };
 
@@ -143,6 +145,7 @@ exports.Prisma.RegistrationsScalarFieldEnum = {
   registrationID: 'registrationID',
   userId: 'userId',
   competitionId: 'competitionId',
+  registrationStatus: 'registrationStatus',
   registeredAt: 'registeredAt'
 };
 
@@ -185,6 +188,12 @@ exports.Prisma.JsonNullValueFilter = {
 exports.UserRole = exports.$Enums.UserRole = {
   participant: 'participant',
   organizer: 'organizer'
+};
+
+exports.RegistrationStatus = exports.$Enums.RegistrationStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED'
 };
 
 exports.Prisma.ModelName = {
