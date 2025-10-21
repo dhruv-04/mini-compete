@@ -50,11 +50,24 @@ export namespace $Enums {
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
+
+export const RegistrationStatus: {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type RegistrationStatus = (typeof RegistrationStatus)[keyof typeof RegistrationStatus]
+
 }
 
 export type UserRole = $Enums.UserRole
 
 export const UserRole: typeof $Enums.UserRole
+
+export type RegistrationStatus = $Enums.RegistrationStatus
+
+export const RegistrationStatus: typeof $Enums.RegistrationStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1236,6 +1249,67 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    registrations: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    registrations?: boolean | UserCountOutputTypeCountRegistrationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRegistrationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RegistrationsWhereInput
+  }
+
+
+  /**
+   * Count Type CompetitionsCountOutputType
+   */
+
+  export type CompetitionsCountOutputType = {
+    registrations: number
+  }
+
+  export type CompetitionsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    registrations?: boolean | CompetitionsCountOutputTypeCountRegistrationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CompetitionsCountOutputType without action
+   */
+  export type CompetitionsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CompetitionsCountOutputType
+     */
+    select?: CompetitionsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CompetitionsCountOutputType without action
+   */
+  export type CompetitionsCountOutputTypeCountRegistrationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RegistrationsWhereInput
+  }
+
 
   /**
    * Models
@@ -1257,6 +1331,7 @@ export namespace Prisma {
     name: string | null
     password: string | null
     role: $Enums.UserRole | null
+    createdAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1265,6 +1340,7 @@ export namespace Prisma {
     name: string | null
     password: string | null
     role: $Enums.UserRole | null
+    createdAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1273,6 +1349,7 @@ export namespace Prisma {
     name: number
     password: number
     role: number
+    createdAt: number
     _all: number
   }
 
@@ -1283,6 +1360,7 @@ export namespace Prisma {
     name?: true
     password?: true
     role?: true
+    createdAt?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1291,6 +1369,7 @@ export namespace Prisma {
     name?: true
     password?: true
     role?: true
+    createdAt?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1299,6 +1378,7 @@ export namespace Prisma {
     name?: true
     password?: true
     role?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -1380,6 +1460,7 @@ export namespace Prisma {
     name: string
     password: string
     role: $Enums.UserRole
+    createdAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1405,6 +1486,9 @@ export namespace Prisma {
     name?: boolean
     password?: boolean
     role?: boolean
+    createdAt?: boolean
+    registrations?: boolean | User$registrationsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1413,6 +1497,7 @@ export namespace Prisma {
     name?: boolean
     password?: boolean
     role?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1421,6 +1506,7 @@ export namespace Prisma {
     name?: boolean
     password?: boolean
     role?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1429,19 +1515,29 @@ export namespace Prisma {
     name?: boolean
     password?: boolean
     role?: boolean
+    createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "email" | "name" | "password" | "role", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "email" | "name" | "password" | "role" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    registrations?: boolean | User$registrationsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
-    objects: {}
+    objects: {
+      registrations: Prisma.$RegistrationsPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       userId: string
       email: string
       name: string
       password: string
       role: $Enums.UserRole
+      createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1836,6 +1932,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    registrations<T extends User$registrationsArgs<ExtArgs> = {}>(args?: Subset<T, User$registrationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RegistrationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1870,6 +1967,7 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -1886,6 +1984,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -1905,6 +2007,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1922,6 +2028,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -1971,6 +2081,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -2019,6 +2133,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput
@@ -2061,6 +2179,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to create a User.
      */
@@ -2109,6 +2231,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to update a User.
      */
@@ -2176,6 +2302,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -2202,6 +2332,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput
@@ -2222,6 +2356,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.registrations
+   */
+  export type User$registrationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Registrations
+     */
+    select?: RegistrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Registrations
+     */
+    omit?: RegistrationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
+    where?: RegistrationsWhereInput
+    orderBy?: RegistrationsOrderByWithRelationInput | RegistrationsOrderByWithRelationInput[]
+    cursor?: RegistrationsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RegistrationsScalarFieldEnum | RegistrationsScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2233,6 +2391,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
   }
 
 
@@ -2265,6 +2427,7 @@ export namespace Prisma {
     capacity: number | null
     registeredCount: number | null
     regDeadLine: Date | null
+    startDate: Date | null
     createdAt: Date | null
   }
 
@@ -2275,6 +2438,7 @@ export namespace Prisma {
     capacity: number | null
     registeredCount: number | null
     regDeadLine: Date | null
+    startDate: Date | null
     createdAt: Date | null
   }
 
@@ -2286,6 +2450,7 @@ export namespace Prisma {
     capacity: number
     registeredCount: number
     regDeadLine: number
+    startDate: number
     createdAt: number
     _all: number
   }
@@ -2308,6 +2473,7 @@ export namespace Prisma {
     capacity?: true
     registeredCount?: true
     regDeadLine?: true
+    startDate?: true
     createdAt?: true
   }
 
@@ -2318,6 +2484,7 @@ export namespace Prisma {
     capacity?: true
     registeredCount?: true
     regDeadLine?: true
+    startDate?: true
     createdAt?: true
   }
 
@@ -2329,6 +2496,7 @@ export namespace Prisma {
     capacity?: true
     registeredCount?: true
     regDeadLine?: true
+    startDate?: true
     createdAt?: true
     _all?: true
   }
@@ -2427,6 +2595,7 @@ export namespace Prisma {
     capacity: number
     registeredCount: number
     regDeadLine: Date
+    startDate: Date
     createdAt: Date
     _count: CompetitionsCountAggregateOutputType | null
     _avg: CompetitionsAvgAggregateOutputType | null
@@ -2457,7 +2626,10 @@ export namespace Prisma {
     capacity?: boolean
     registeredCount?: boolean
     regDeadLine?: boolean
+    startDate?: boolean
     createdAt?: boolean
+    registrations?: boolean | Competitions$registrationsArgs<ExtArgs>
+    _count?: boolean | CompetitionsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["competitions"]>
 
   export type CompetitionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2468,6 +2640,7 @@ export namespace Prisma {
     capacity?: boolean
     registeredCount?: boolean
     regDeadLine?: boolean
+    startDate?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["competitions"]>
 
@@ -2479,6 +2652,7 @@ export namespace Prisma {
     capacity?: boolean
     registeredCount?: boolean
     regDeadLine?: boolean
+    startDate?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["competitions"]>
 
@@ -2490,14 +2664,23 @@ export namespace Prisma {
     capacity?: boolean
     registeredCount?: boolean
     regDeadLine?: boolean
+    startDate?: boolean
     createdAt?: boolean
   }
 
-  export type CompetitionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"competitionId" | "title" | "description" | "tags" | "capacity" | "registeredCount" | "regDeadLine" | "createdAt", ExtArgs["result"]["competitions"]>
+  export type CompetitionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"competitionId" | "title" | "description" | "tags" | "capacity" | "registeredCount" | "regDeadLine" | "startDate" | "createdAt", ExtArgs["result"]["competitions"]>
+  export type CompetitionsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    registrations?: boolean | Competitions$registrationsArgs<ExtArgs>
+    _count?: boolean | CompetitionsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CompetitionsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CompetitionsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $CompetitionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Competitions"
-    objects: {}
+    objects: {
+      registrations: Prisma.$RegistrationsPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       competitionId: string
       title: string
@@ -2506,6 +2689,7 @@ export namespace Prisma {
       capacity: number
       registeredCount: number
       regDeadLine: Date
+      startDate: Date
       createdAt: Date
     }, ExtArgs["result"]["competitions"]>
     composites: {}
@@ -2901,6 +3085,7 @@ export namespace Prisma {
    */
   export interface Prisma__CompetitionsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    registrations<T extends Competitions$registrationsArgs<ExtArgs> = {}>(args?: Subset<T, Competitions$registrationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RegistrationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2937,6 +3122,7 @@ export namespace Prisma {
     readonly capacity: FieldRef<"Competitions", 'Int'>
     readonly registeredCount: FieldRef<"Competitions", 'Int'>
     readonly regDeadLine: FieldRef<"Competitions", 'DateTime'>
+    readonly startDate: FieldRef<"Competitions", 'DateTime'>
     readonly createdAt: FieldRef<"Competitions", 'DateTime'>
   }
     
@@ -2954,6 +3140,10 @@ export namespace Prisma {
      * Omit specific fields from the Competitions
      */
     omit?: CompetitionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompetitionsInclude<ExtArgs> | null
     /**
      * Filter, which Competitions to fetch.
      */
@@ -2973,6 +3163,10 @@ export namespace Prisma {
      */
     omit?: CompetitionsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompetitionsInclude<ExtArgs> | null
+    /**
      * Filter, which Competitions to fetch.
      */
     where: CompetitionsWhereUniqueInput
@@ -2990,6 +3184,10 @@ export namespace Prisma {
      * Omit specific fields from the Competitions
      */
     omit?: CompetitionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompetitionsInclude<ExtArgs> | null
     /**
      * Filter, which Competitions to fetch.
      */
@@ -3039,6 +3237,10 @@ export namespace Prisma {
      */
     omit?: CompetitionsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompetitionsInclude<ExtArgs> | null
+    /**
      * Filter, which Competitions to fetch.
      */
     where?: CompetitionsWhereInput
@@ -3087,6 +3289,10 @@ export namespace Prisma {
      */
     omit?: CompetitionsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompetitionsInclude<ExtArgs> | null
+    /**
      * Filter, which Competitions to fetch.
      */
     where?: CompetitionsWhereInput
@@ -3129,6 +3335,10 @@ export namespace Prisma {
      * Omit specific fields from the Competitions
      */
     omit?: CompetitionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompetitionsInclude<ExtArgs> | null
     /**
      * The data needed to create a Competitions.
      */
@@ -3177,6 +3387,10 @@ export namespace Prisma {
      * Omit specific fields from the Competitions
      */
     omit?: CompetitionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompetitionsInclude<ExtArgs> | null
     /**
      * The data needed to update a Competitions.
      */
@@ -3244,6 +3458,10 @@ export namespace Prisma {
      */
     omit?: CompetitionsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompetitionsInclude<ExtArgs> | null
+    /**
      * The filter to search for the Competitions to update in case it exists.
      */
     where: CompetitionsWhereUniqueInput
@@ -3270,6 +3488,10 @@ export namespace Prisma {
      */
     omit?: CompetitionsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompetitionsInclude<ExtArgs> | null
+    /**
      * Filter which Competitions to delete.
      */
     where: CompetitionsWhereUniqueInput
@@ -3290,6 +3512,30 @@ export namespace Prisma {
   }
 
   /**
+   * Competitions.registrations
+   */
+  export type Competitions$registrationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Registrations
+     */
+    select?: RegistrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Registrations
+     */
+    omit?: RegistrationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
+    where?: RegistrationsWhereInput
+    orderBy?: RegistrationsOrderByWithRelationInput | RegistrationsOrderByWithRelationInput[]
+    cursor?: RegistrationsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RegistrationsScalarFieldEnum | RegistrationsScalarFieldEnum[]
+  }
+
+  /**
    * Competitions without action
    */
   export type CompetitionsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3301,6 +3547,10 @@ export namespace Prisma {
      * Omit specific fields from the Competitions
      */
     omit?: CompetitionsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompetitionsInclude<ExtArgs> | null
   }
 
 
@@ -3318,6 +3568,7 @@ export namespace Prisma {
     registrationID: string | null
     userId: string | null
     competitionId: string | null
+    registrationStatus: $Enums.RegistrationStatus | null
     registeredAt: Date | null
   }
 
@@ -3325,6 +3576,7 @@ export namespace Prisma {
     registrationID: string | null
     userId: string | null
     competitionId: string | null
+    registrationStatus: $Enums.RegistrationStatus | null
     registeredAt: Date | null
   }
 
@@ -3332,6 +3584,7 @@ export namespace Prisma {
     registrationID: number
     userId: number
     competitionId: number
+    registrationStatus: number
     registeredAt: number
     _all: number
   }
@@ -3341,6 +3594,7 @@ export namespace Prisma {
     registrationID?: true
     userId?: true
     competitionId?: true
+    registrationStatus?: true
     registeredAt?: true
   }
 
@@ -3348,6 +3602,7 @@ export namespace Prisma {
     registrationID?: true
     userId?: true
     competitionId?: true
+    registrationStatus?: true
     registeredAt?: true
   }
 
@@ -3355,6 +3610,7 @@ export namespace Prisma {
     registrationID?: true
     userId?: true
     competitionId?: true
+    registrationStatus?: true
     registeredAt?: true
     _all?: true
   }
@@ -3435,6 +3691,7 @@ export namespace Prisma {
     registrationID: string
     userId: string
     competitionId: string
+    registrationStatus: $Enums.RegistrationStatus
     registeredAt: Date
     _count: RegistrationsCountAggregateOutputType | null
     _min: RegistrationsMinAggregateOutputType | null
@@ -3459,39 +3716,65 @@ export namespace Prisma {
     registrationID?: boolean
     userId?: boolean
     competitionId?: boolean
+    registrationStatus?: boolean
     registeredAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    competition?: boolean | CompetitionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["registrations"]>
 
   export type RegistrationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     registrationID?: boolean
     userId?: boolean
     competitionId?: boolean
+    registrationStatus?: boolean
     registeredAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    competition?: boolean | CompetitionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["registrations"]>
 
   export type RegistrationsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     registrationID?: boolean
     userId?: boolean
     competitionId?: boolean
+    registrationStatus?: boolean
     registeredAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    competition?: boolean | CompetitionsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["registrations"]>
 
   export type RegistrationsSelectScalar = {
     registrationID?: boolean
     userId?: boolean
     competitionId?: boolean
+    registrationStatus?: boolean
     registeredAt?: boolean
   }
 
-  export type RegistrationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"registrationID" | "userId" | "competitionId" | "registeredAt", ExtArgs["result"]["registrations"]>
+  export type RegistrationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"registrationID" | "userId" | "competitionId" | "registrationStatus" | "registeredAt", ExtArgs["result"]["registrations"]>
+  export type RegistrationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    competition?: boolean | CompetitionsDefaultArgs<ExtArgs>
+  }
+  export type RegistrationsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    competition?: boolean | CompetitionsDefaultArgs<ExtArgs>
+  }
+  export type RegistrationsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    competition?: boolean | CompetitionsDefaultArgs<ExtArgs>
+  }
 
   export type $RegistrationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Registrations"
-    objects: {}
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      competition: Prisma.$CompetitionsPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       registrationID: string
       userId: string
       competitionId: string
+      registrationStatus: $Enums.RegistrationStatus
       registeredAt: Date
     }, ExtArgs["result"]["registrations"]>
     composites: {}
@@ -3887,6 +4170,8 @@ export namespace Prisma {
    */
   export interface Prisma__RegistrationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    competition<T extends CompetitionsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompetitionsDefaultArgs<ExtArgs>>): Prisma__CompetitionsClient<$Result.GetResult<Prisma.$CompetitionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3919,6 +4204,7 @@ export namespace Prisma {
     readonly registrationID: FieldRef<"Registrations", 'String'>
     readonly userId: FieldRef<"Registrations", 'String'>
     readonly competitionId: FieldRef<"Registrations", 'String'>
+    readonly registrationStatus: FieldRef<"Registrations", 'RegistrationStatus'>
     readonly registeredAt: FieldRef<"Registrations", 'DateTime'>
   }
     
@@ -3936,6 +4222,10 @@ export namespace Prisma {
      * Omit specific fields from the Registrations
      */
     omit?: RegistrationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
     /**
      * Filter, which Registrations to fetch.
      */
@@ -3955,6 +4245,10 @@ export namespace Prisma {
      */
     omit?: RegistrationsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
+    /**
      * Filter, which Registrations to fetch.
      */
     where: RegistrationsWhereUniqueInput
@@ -3972,6 +4266,10 @@ export namespace Prisma {
      * Omit specific fields from the Registrations
      */
     omit?: RegistrationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
     /**
      * Filter, which Registrations to fetch.
      */
@@ -4021,6 +4319,10 @@ export namespace Prisma {
      */
     omit?: RegistrationsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
+    /**
      * Filter, which Registrations to fetch.
      */
     where?: RegistrationsWhereInput
@@ -4069,6 +4371,10 @@ export namespace Prisma {
      */
     omit?: RegistrationsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
+    /**
      * Filter, which Registrations to fetch.
      */
     where?: RegistrationsWhereInput
@@ -4112,6 +4418,10 @@ export namespace Prisma {
      */
     omit?: RegistrationsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
+    /**
      * The data needed to create a Registrations.
      */
     data: XOR<RegistrationsCreateInput, RegistrationsUncheckedCreateInput>
@@ -4145,6 +4455,10 @@ export namespace Prisma {
      */
     data: RegistrationsCreateManyInput | RegistrationsCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4159,6 +4473,10 @@ export namespace Prisma {
      * Omit specific fields from the Registrations
      */
     omit?: RegistrationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
     /**
      * The data needed to update a Registrations.
      */
@@ -4211,6 +4529,10 @@ export namespace Prisma {
      * Limit how many Registrations to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4225,6 +4547,10 @@ export namespace Prisma {
      * Omit specific fields from the Registrations
      */
     omit?: RegistrationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
     /**
      * The filter to search for the Registrations to update in case it exists.
      */
@@ -4251,6 +4577,10 @@ export namespace Prisma {
      * Omit specific fields from the Registrations
      */
     omit?: RegistrationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
     /**
      * Filter which Registrations to delete.
      */
@@ -4283,6 +4613,10 @@ export namespace Prisma {
      * Omit specific fields from the Registrations
      */
     omit?: RegistrationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegistrationsInclude<ExtArgs> | null
   }
 
 
@@ -6304,7 +6638,8 @@ export namespace Prisma {
     email: 'email',
     name: 'name',
     password: 'password',
-    role: 'role'
+    role: 'role',
+    createdAt: 'createdAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -6318,6 +6653,7 @@ export namespace Prisma {
     capacity: 'capacity',
     registeredCount: 'registeredCount',
     regDeadLine: 'regDeadLine',
+    startDate: 'startDate',
     createdAt: 'createdAt'
   };
 
@@ -6328,6 +6664,7 @@ export namespace Prisma {
     registrationID: 'registrationID',
     userId: 'userId',
     competitionId: 'competitionId',
+    registrationStatus: 'registrationStatus',
     registeredAt: 'registeredAt'
   };
 
@@ -6423,6 +6760,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -6437,16 +6788,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DateTime'
+   * Reference to a field of type 'RegistrationStatus'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+  export type EnumRegistrationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RegistrationStatus'>
     
 
 
   /**
-   * Reference to a field of type 'DateTime[]'
+   * Reference to a field of type 'RegistrationStatus[]'
    */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+  export type ListEnumRegistrationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RegistrationStatus[]'>
     
 
 
@@ -6490,6 +6841,8 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    registrations?: RegistrationsListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -6498,6 +6851,8 @@ export namespace Prisma {
     name?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    createdAt?: SortOrder
+    registrations?: RegistrationsOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -6509,6 +6864,8 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    registrations?: RegistrationsListRelationFilter
   }, "userId" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -6517,6 +6874,7 @@ export namespace Prisma {
     name?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -6531,6 +6889,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
   export type CompetitionsWhereInput = {
@@ -6544,7 +6903,9 @@ export namespace Prisma {
     capacity?: IntFilter<"Competitions"> | number
     registeredCount?: IntFilter<"Competitions"> | number
     regDeadLine?: DateTimeFilter<"Competitions"> | Date | string
+    startDate?: DateTimeFilter<"Competitions"> | Date | string
     createdAt?: DateTimeFilter<"Competitions"> | Date | string
+    registrations?: RegistrationsListRelationFilter
   }
 
   export type CompetitionsOrderByWithRelationInput = {
@@ -6555,7 +6916,9 @@ export namespace Prisma {
     capacity?: SortOrder
     registeredCount?: SortOrder
     regDeadLine?: SortOrder
+    startDate?: SortOrder
     createdAt?: SortOrder
+    registrations?: RegistrationsOrderByRelationAggregateInput
   }
 
   export type CompetitionsWhereUniqueInput = Prisma.AtLeast<{
@@ -6569,7 +6932,9 @@ export namespace Prisma {
     capacity?: IntFilter<"Competitions"> | number
     registeredCount?: IntFilter<"Competitions"> | number
     regDeadLine?: DateTimeFilter<"Competitions"> | Date | string
+    startDate?: DateTimeFilter<"Competitions"> | Date | string
     createdAt?: DateTimeFilter<"Competitions"> | Date | string
+    registrations?: RegistrationsListRelationFilter
   }, "competitionId">
 
   export type CompetitionsOrderByWithAggregationInput = {
@@ -6580,6 +6945,7 @@ export namespace Prisma {
     capacity?: SortOrder
     registeredCount?: SortOrder
     regDeadLine?: SortOrder
+    startDate?: SortOrder
     createdAt?: SortOrder
     _count?: CompetitionsCountOrderByAggregateInput
     _avg?: CompetitionsAvgOrderByAggregateInput
@@ -6599,6 +6965,7 @@ export namespace Prisma {
     capacity?: IntWithAggregatesFilter<"Competitions"> | number
     registeredCount?: IntWithAggregatesFilter<"Competitions"> | number
     regDeadLine?: DateTimeWithAggregatesFilter<"Competitions"> | Date | string
+    startDate?: DateTimeWithAggregatesFilter<"Competitions"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"Competitions"> | Date | string
   }
 
@@ -6609,14 +6976,20 @@ export namespace Prisma {
     registrationID?: StringFilter<"Registrations"> | string
     userId?: StringFilter<"Registrations"> | string
     competitionId?: StringFilter<"Registrations"> | string
+    registrationStatus?: EnumRegistrationStatusFilter<"Registrations"> | $Enums.RegistrationStatus
     registeredAt?: DateTimeFilter<"Registrations"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    competition?: XOR<CompetitionsScalarRelationFilter, CompetitionsWhereInput>
   }
 
   export type RegistrationsOrderByWithRelationInput = {
     registrationID?: SortOrder
     userId?: SortOrder
     competitionId?: SortOrder
+    registrationStatus?: SortOrder
     registeredAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    competition?: CompetitionsOrderByWithRelationInput
   }
 
   export type RegistrationsWhereUniqueInput = Prisma.AtLeast<{
@@ -6627,13 +7000,17 @@ export namespace Prisma {
     NOT?: RegistrationsWhereInput | RegistrationsWhereInput[]
     userId?: StringFilter<"Registrations"> | string
     competitionId?: StringFilter<"Registrations"> | string
+    registrationStatus?: EnumRegistrationStatusFilter<"Registrations"> | $Enums.RegistrationStatus
     registeredAt?: DateTimeFilter<"Registrations"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    competition?: XOR<CompetitionsScalarRelationFilter, CompetitionsWhereInput>
   }, "registrationID" | "userId_competitionId">
 
   export type RegistrationsOrderByWithAggregationInput = {
     registrationID?: SortOrder
     userId?: SortOrder
     competitionId?: SortOrder
+    registrationStatus?: SortOrder
     registeredAt?: SortOrder
     _count?: RegistrationsCountOrderByAggregateInput
     _max?: RegistrationsMaxOrderByAggregateInput
@@ -6647,6 +7024,7 @@ export namespace Prisma {
     registrationID?: StringWithAggregatesFilter<"Registrations"> | string
     userId?: StringWithAggregatesFilter<"Registrations"> | string
     competitionId?: StringWithAggregatesFilter<"Registrations"> | string
+    registrationStatus?: EnumRegistrationStatusWithAggregatesFilter<"Registrations"> | $Enums.RegistrationStatus
     registeredAt?: DateTimeWithAggregatesFilter<"Registrations"> | Date | string
   }
 
@@ -6765,6 +7143,8 @@ export namespace Prisma {
     name: string
     password: string
     role: $Enums.UserRole
+    createdAt?: Date | string
+    registrations?: RegistrationsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6773,6 +7153,8 @@ export namespace Prisma {
     name: string
     password: string
     role: $Enums.UserRole
+    createdAt?: Date | string
+    registrations?: RegistrationsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6781,6 +7163,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    registrations?: RegistrationsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6789,6 +7173,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    registrations?: RegistrationsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6797,6 +7183,7 @@ export namespace Prisma {
     name: string
     password: string
     role: $Enums.UserRole
+    createdAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -6805,6 +7192,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -6813,6 +7201,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CompetitionsCreateInput = {
@@ -6823,7 +7212,9 @@ export namespace Prisma {
     capacity: number
     registeredCount?: number
     regDeadLine: Date | string
+    startDate: Date | string
     createdAt?: Date | string
+    registrations?: RegistrationsCreateNestedManyWithoutCompetitionInput
   }
 
   export type CompetitionsUncheckedCreateInput = {
@@ -6834,7 +7225,9 @@ export namespace Prisma {
     capacity: number
     registeredCount?: number
     regDeadLine: Date | string
+    startDate: Date | string
     createdAt?: Date | string
+    registrations?: RegistrationsUncheckedCreateNestedManyWithoutCompetitionInput
   }
 
   export type CompetitionsUpdateInput = {
@@ -6845,7 +7238,9 @@ export namespace Prisma {
     capacity?: IntFieldUpdateOperationsInput | number
     registeredCount?: IntFieldUpdateOperationsInput | number
     regDeadLine?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    registrations?: RegistrationsUpdateManyWithoutCompetitionNestedInput
   }
 
   export type CompetitionsUncheckedUpdateInput = {
@@ -6856,7 +7251,9 @@ export namespace Prisma {
     capacity?: IntFieldUpdateOperationsInput | number
     registeredCount?: IntFieldUpdateOperationsInput | number
     regDeadLine?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    registrations?: RegistrationsUncheckedUpdateManyWithoutCompetitionNestedInput
   }
 
   export type CompetitionsCreateManyInput = {
@@ -6867,6 +7264,7 @@ export namespace Prisma {
     capacity: number
     registeredCount?: number
     regDeadLine: Date | string
+    startDate: Date | string
     createdAt?: Date | string
   }
 
@@ -6878,6 +7276,7 @@ export namespace Prisma {
     capacity?: IntFieldUpdateOperationsInput | number
     registeredCount?: IntFieldUpdateOperationsInput | number
     regDeadLine?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6889,34 +7288,39 @@ export namespace Prisma {
     capacity?: IntFieldUpdateOperationsInput | number
     registeredCount?: IntFieldUpdateOperationsInput | number
     regDeadLine?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RegistrationsCreateInput = {
     registrationID?: string
-    userId: string
-    competitionId: string
+    registrationStatus?: $Enums.RegistrationStatus
     registeredAt?: Date | string
+    user: UserCreateNestedOneWithoutRegistrationsInput
+    competition: CompetitionsCreateNestedOneWithoutRegistrationsInput
   }
 
   export type RegistrationsUncheckedCreateInput = {
     registrationID?: string
     userId: string
     competitionId: string
+    registrationStatus?: $Enums.RegistrationStatus
     registeredAt?: Date | string
   }
 
   export type RegistrationsUpdateInput = {
     registrationID?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    competitionId?: StringFieldUpdateOperationsInput | string
+    registrationStatus?: EnumRegistrationStatusFieldUpdateOperationsInput | $Enums.RegistrationStatus
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRegistrationsNestedInput
+    competition?: CompetitionsUpdateOneRequiredWithoutRegistrationsNestedInput
   }
 
   export type RegistrationsUncheckedUpdateInput = {
     registrationID?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     competitionId?: StringFieldUpdateOperationsInput | string
+    registrationStatus?: EnumRegistrationStatusFieldUpdateOperationsInput | $Enums.RegistrationStatus
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6924,13 +7328,13 @@ export namespace Prisma {
     registrationID?: string
     userId: string
     competitionId: string
+    registrationStatus?: $Enums.RegistrationStatus
     registeredAt?: Date | string
   }
 
   export type RegistrationsUpdateManyMutationInput = {
     registrationID?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    competitionId?: StringFieldUpdateOperationsInput | string
+    registrationStatus?: EnumRegistrationStatusFieldUpdateOperationsInput | $Enums.RegistrationStatus
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6938,6 +7342,7 @@ export namespace Prisma {
     registrationID?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     competitionId?: StringFieldUpdateOperationsInput | string
+    registrationStatus?: EnumRegistrationStatusFieldUpdateOperationsInput | $Enums.RegistrationStatus
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -7082,12 +7487,34 @@ export namespace Prisma {
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type RegistrationsListRelationFilter = {
+    every?: RegistrationsWhereInput
+    some?: RegistrationsWhereInput
+    none?: RegistrationsWhereInput
+  }
+
+  export type RegistrationsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     userId?: SortOrder
     email?: SortOrder
     name?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -7096,6 +7523,7 @@ export namespace Prisma {
     name?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -7104,6 +7532,7 @@ export namespace Prisma {
     name?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -7134,6 +7563,20 @@ export namespace Prisma {
     _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type StringNullableListFilter<$PrismaModel = never> = {
     equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     has?: string | StringFieldRefInput<$PrismaModel> | null
@@ -7153,17 +7596,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type CompetitionsCountOrderByAggregateInput = {
     competitionId?: SortOrder
     title?: SortOrder
@@ -7172,6 +7604,7 @@ export namespace Prisma {
     capacity?: SortOrder
     registeredCount?: SortOrder
     regDeadLine?: SortOrder
+    startDate?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -7187,6 +7620,7 @@ export namespace Prisma {
     capacity?: SortOrder
     registeredCount?: SortOrder
     regDeadLine?: SortOrder
+    startDate?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -7197,6 +7631,7 @@ export namespace Prisma {
     capacity?: SortOrder
     registeredCount?: SortOrder
     regDeadLine?: SortOrder
+    startDate?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -7221,18 +7656,21 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+  export type EnumRegistrationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.RegistrationStatus | EnumRegistrationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RegistrationStatus[] | ListEnumRegistrationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RegistrationStatus[] | ListEnumRegistrationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRegistrationStatusFilter<$PrismaModel> | $Enums.RegistrationStatus
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type CompetitionsScalarRelationFilter = {
+    is?: CompetitionsWhereInput
+    isNot?: CompetitionsWhereInput
   }
 
   export type RegistrationsUserIdCompetitionIdCompoundUniqueInput = {
@@ -7244,6 +7682,7 @@ export namespace Prisma {
     registrationID?: SortOrder
     userId?: SortOrder
     competitionId?: SortOrder
+    registrationStatus?: SortOrder
     registeredAt?: SortOrder
   }
 
@@ -7251,6 +7690,7 @@ export namespace Prisma {
     registrationID?: SortOrder
     userId?: SortOrder
     competitionId?: SortOrder
+    registrationStatus?: SortOrder
     registeredAt?: SortOrder
   }
 
@@ -7258,7 +7698,18 @@ export namespace Prisma {
     registrationID?: SortOrder
     userId?: SortOrder
     competitionId?: SortOrder
+    registrationStatus?: SortOrder
     registeredAt?: SortOrder
+  }
+
+  export type EnumRegistrationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RegistrationStatus | EnumRegistrationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RegistrationStatus[] | ListEnumRegistrationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RegistrationStatus[] | ListEnumRegistrationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRegistrationStatusWithAggregatesFilter<$PrismaModel> | $Enums.RegistrationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRegistrationStatusFilter<$PrismaModel>
+    _max?: NestedEnumRegistrationStatusFilter<$PrismaModel>
   }
 
   export type MailBoxCountOrderByAggregateInput = {
@@ -7359,6 +7810,20 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type RegistrationsCreateNestedManyWithoutUserInput = {
+    create?: XOR<RegistrationsCreateWithoutUserInput, RegistrationsUncheckedCreateWithoutUserInput> | RegistrationsCreateWithoutUserInput[] | RegistrationsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RegistrationsCreateOrConnectWithoutUserInput | RegistrationsCreateOrConnectWithoutUserInput[]
+    createMany?: RegistrationsCreateManyUserInputEnvelope
+    connect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+  }
+
+  export type RegistrationsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RegistrationsCreateWithoutUserInput, RegistrationsUncheckedCreateWithoutUserInput> | RegistrationsCreateWithoutUserInput[] | RegistrationsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RegistrationsCreateOrConnectWithoutUserInput | RegistrationsCreateOrConnectWithoutUserInput[]
+    createMany?: RegistrationsCreateManyUserInputEnvelope
+    connect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -7367,8 +7832,54 @@ export namespace Prisma {
     set?: $Enums.UserRole
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type RegistrationsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RegistrationsCreateWithoutUserInput, RegistrationsUncheckedCreateWithoutUserInput> | RegistrationsCreateWithoutUserInput[] | RegistrationsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RegistrationsCreateOrConnectWithoutUserInput | RegistrationsCreateOrConnectWithoutUserInput[]
+    upsert?: RegistrationsUpsertWithWhereUniqueWithoutUserInput | RegistrationsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RegistrationsCreateManyUserInputEnvelope
+    set?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    disconnect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    delete?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    connect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    update?: RegistrationsUpdateWithWhereUniqueWithoutUserInput | RegistrationsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RegistrationsUpdateManyWithWhereWithoutUserInput | RegistrationsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RegistrationsScalarWhereInput | RegistrationsScalarWhereInput[]
+  }
+
+  export type RegistrationsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RegistrationsCreateWithoutUserInput, RegistrationsUncheckedCreateWithoutUserInput> | RegistrationsCreateWithoutUserInput[] | RegistrationsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RegistrationsCreateOrConnectWithoutUserInput | RegistrationsCreateOrConnectWithoutUserInput[]
+    upsert?: RegistrationsUpsertWithWhereUniqueWithoutUserInput | RegistrationsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RegistrationsCreateManyUserInputEnvelope
+    set?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    disconnect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    delete?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    connect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    update?: RegistrationsUpdateWithWhereUniqueWithoutUserInput | RegistrationsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RegistrationsUpdateManyWithWhereWithoutUserInput | RegistrationsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RegistrationsScalarWhereInput | RegistrationsScalarWhereInput[]
+  }
+
   export type CompetitionsCreatetagsInput = {
     set: string[]
+  }
+
+  export type RegistrationsCreateNestedManyWithoutCompetitionInput = {
+    create?: XOR<RegistrationsCreateWithoutCompetitionInput, RegistrationsUncheckedCreateWithoutCompetitionInput> | RegistrationsCreateWithoutCompetitionInput[] | RegistrationsUncheckedCreateWithoutCompetitionInput[]
+    connectOrCreate?: RegistrationsCreateOrConnectWithoutCompetitionInput | RegistrationsCreateOrConnectWithoutCompetitionInput[]
+    createMany?: RegistrationsCreateManyCompetitionInputEnvelope
+    connect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+  }
+
+  export type RegistrationsUncheckedCreateNestedManyWithoutCompetitionInput = {
+    create?: XOR<RegistrationsCreateWithoutCompetitionInput, RegistrationsUncheckedCreateWithoutCompetitionInput> | RegistrationsCreateWithoutCompetitionInput[] | RegistrationsUncheckedCreateWithoutCompetitionInput[]
+    connectOrCreate?: RegistrationsCreateOrConnectWithoutCompetitionInput | RegistrationsCreateOrConnectWithoutCompetitionInput[]
+    createMany?: RegistrationsCreateManyCompetitionInputEnvelope
+    connect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
   }
 
   export type CompetitionsUpdatetagsInput = {
@@ -7384,8 +7895,64 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type RegistrationsUpdateManyWithoutCompetitionNestedInput = {
+    create?: XOR<RegistrationsCreateWithoutCompetitionInput, RegistrationsUncheckedCreateWithoutCompetitionInput> | RegistrationsCreateWithoutCompetitionInput[] | RegistrationsUncheckedCreateWithoutCompetitionInput[]
+    connectOrCreate?: RegistrationsCreateOrConnectWithoutCompetitionInput | RegistrationsCreateOrConnectWithoutCompetitionInput[]
+    upsert?: RegistrationsUpsertWithWhereUniqueWithoutCompetitionInput | RegistrationsUpsertWithWhereUniqueWithoutCompetitionInput[]
+    createMany?: RegistrationsCreateManyCompetitionInputEnvelope
+    set?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    disconnect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    delete?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    connect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    update?: RegistrationsUpdateWithWhereUniqueWithoutCompetitionInput | RegistrationsUpdateWithWhereUniqueWithoutCompetitionInput[]
+    updateMany?: RegistrationsUpdateManyWithWhereWithoutCompetitionInput | RegistrationsUpdateManyWithWhereWithoutCompetitionInput[]
+    deleteMany?: RegistrationsScalarWhereInput | RegistrationsScalarWhereInput[]
+  }
+
+  export type RegistrationsUncheckedUpdateManyWithoutCompetitionNestedInput = {
+    create?: XOR<RegistrationsCreateWithoutCompetitionInput, RegistrationsUncheckedCreateWithoutCompetitionInput> | RegistrationsCreateWithoutCompetitionInput[] | RegistrationsUncheckedCreateWithoutCompetitionInput[]
+    connectOrCreate?: RegistrationsCreateOrConnectWithoutCompetitionInput | RegistrationsCreateOrConnectWithoutCompetitionInput[]
+    upsert?: RegistrationsUpsertWithWhereUniqueWithoutCompetitionInput | RegistrationsUpsertWithWhereUniqueWithoutCompetitionInput[]
+    createMany?: RegistrationsCreateManyCompetitionInputEnvelope
+    set?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    disconnect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    delete?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    connect?: RegistrationsWhereUniqueInput | RegistrationsWhereUniqueInput[]
+    update?: RegistrationsUpdateWithWhereUniqueWithoutCompetitionInput | RegistrationsUpdateWithWhereUniqueWithoutCompetitionInput[]
+    updateMany?: RegistrationsUpdateManyWithWhereWithoutCompetitionInput | RegistrationsUpdateManyWithWhereWithoutCompetitionInput[]
+    deleteMany?: RegistrationsScalarWhereInput | RegistrationsScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutRegistrationsInput = {
+    create?: XOR<UserCreateWithoutRegistrationsInput, UserUncheckedCreateWithoutRegistrationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRegistrationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CompetitionsCreateNestedOneWithoutRegistrationsInput = {
+    create?: XOR<CompetitionsCreateWithoutRegistrationsInput, CompetitionsUncheckedCreateWithoutRegistrationsInput>
+    connectOrCreate?: CompetitionsCreateOrConnectWithoutRegistrationsInput
+    connect?: CompetitionsWhereUniqueInput
+  }
+
+  export type EnumRegistrationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.RegistrationStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutRegistrationsNestedInput = {
+    create?: XOR<UserCreateWithoutRegistrationsInput, UserUncheckedCreateWithoutRegistrationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRegistrationsInput
+    upsert?: UserUpsertWithoutRegistrationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRegistrationsInput, UserUpdateWithoutRegistrationsInput>, UserUncheckedUpdateWithoutRegistrationsInput>
+  }
+
+  export type CompetitionsUpdateOneRequiredWithoutRegistrationsNestedInput = {
+    create?: XOR<CompetitionsCreateWithoutRegistrationsInput, CompetitionsUncheckedCreateWithoutRegistrationsInput>
+    connectOrCreate?: CompetitionsCreateOrConnectWithoutRegistrationsInput
+    upsert?: CompetitionsUpsertWithoutRegistrationsInput
+    connect?: CompetitionsWhereUniqueInput
+    update?: XOR<XOR<CompetitionsUpdateToOneWithWhereWithoutRegistrationsInput, CompetitionsUpdateWithoutRegistrationsInput>, CompetitionsUncheckedUpdateWithoutRegistrationsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7407,6 +7974,17 @@ export namespace Prisma {
     in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
     notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -7447,7 +8025,7 @@ export namespace Prisma {
     _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -7455,7 +8033,10 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -7485,18 +8066,21 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+  export type NestedEnumRegistrationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.RegistrationStatus | EnumRegistrationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RegistrationStatus[] | ListEnumRegistrationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RegistrationStatus[] | ListEnumRegistrationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRegistrationStatusFilter<$PrismaModel> | $Enums.RegistrationStatus
+  }
+
+  export type NestedEnumRegistrationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RegistrationStatus | EnumRegistrationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RegistrationStatus[] | ListEnumRegistrationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RegistrationStatus[] | ListEnumRegistrationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRegistrationStatusWithAggregatesFilter<$PrismaModel> | $Enums.RegistrationStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    _min?: NestedEnumRegistrationStatusFilter<$PrismaModel>
+    _max?: NestedEnumRegistrationStatusFilter<$PrismaModel>
   }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -7520,6 +8104,269 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type RegistrationsCreateWithoutUserInput = {
+    registrationID?: string
+    registrationStatus?: $Enums.RegistrationStatus
+    registeredAt?: Date | string
+    competition: CompetitionsCreateNestedOneWithoutRegistrationsInput
+  }
+
+  export type RegistrationsUncheckedCreateWithoutUserInput = {
+    registrationID?: string
+    competitionId: string
+    registrationStatus?: $Enums.RegistrationStatus
+    registeredAt?: Date | string
+  }
+
+  export type RegistrationsCreateOrConnectWithoutUserInput = {
+    where: RegistrationsWhereUniqueInput
+    create: XOR<RegistrationsCreateWithoutUserInput, RegistrationsUncheckedCreateWithoutUserInput>
+  }
+
+  export type RegistrationsCreateManyUserInputEnvelope = {
+    data: RegistrationsCreateManyUserInput | RegistrationsCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RegistrationsUpsertWithWhereUniqueWithoutUserInput = {
+    where: RegistrationsWhereUniqueInput
+    update: XOR<RegistrationsUpdateWithoutUserInput, RegistrationsUncheckedUpdateWithoutUserInput>
+    create: XOR<RegistrationsCreateWithoutUserInput, RegistrationsUncheckedCreateWithoutUserInput>
+  }
+
+  export type RegistrationsUpdateWithWhereUniqueWithoutUserInput = {
+    where: RegistrationsWhereUniqueInput
+    data: XOR<RegistrationsUpdateWithoutUserInput, RegistrationsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RegistrationsUpdateManyWithWhereWithoutUserInput = {
+    where: RegistrationsScalarWhereInput
+    data: XOR<RegistrationsUpdateManyMutationInput, RegistrationsUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RegistrationsScalarWhereInput = {
+    AND?: RegistrationsScalarWhereInput | RegistrationsScalarWhereInput[]
+    OR?: RegistrationsScalarWhereInput[]
+    NOT?: RegistrationsScalarWhereInput | RegistrationsScalarWhereInput[]
+    registrationID?: StringFilter<"Registrations"> | string
+    userId?: StringFilter<"Registrations"> | string
+    competitionId?: StringFilter<"Registrations"> | string
+    registrationStatus?: EnumRegistrationStatusFilter<"Registrations"> | $Enums.RegistrationStatus
+    registeredAt?: DateTimeFilter<"Registrations"> | Date | string
+  }
+
+  export type RegistrationsCreateWithoutCompetitionInput = {
+    registrationID?: string
+    registrationStatus?: $Enums.RegistrationStatus
+    registeredAt?: Date | string
+    user: UserCreateNestedOneWithoutRegistrationsInput
+  }
+
+  export type RegistrationsUncheckedCreateWithoutCompetitionInput = {
+    registrationID?: string
+    userId: string
+    registrationStatus?: $Enums.RegistrationStatus
+    registeredAt?: Date | string
+  }
+
+  export type RegistrationsCreateOrConnectWithoutCompetitionInput = {
+    where: RegistrationsWhereUniqueInput
+    create: XOR<RegistrationsCreateWithoutCompetitionInput, RegistrationsUncheckedCreateWithoutCompetitionInput>
+  }
+
+  export type RegistrationsCreateManyCompetitionInputEnvelope = {
+    data: RegistrationsCreateManyCompetitionInput | RegistrationsCreateManyCompetitionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RegistrationsUpsertWithWhereUniqueWithoutCompetitionInput = {
+    where: RegistrationsWhereUniqueInput
+    update: XOR<RegistrationsUpdateWithoutCompetitionInput, RegistrationsUncheckedUpdateWithoutCompetitionInput>
+    create: XOR<RegistrationsCreateWithoutCompetitionInput, RegistrationsUncheckedCreateWithoutCompetitionInput>
+  }
+
+  export type RegistrationsUpdateWithWhereUniqueWithoutCompetitionInput = {
+    where: RegistrationsWhereUniqueInput
+    data: XOR<RegistrationsUpdateWithoutCompetitionInput, RegistrationsUncheckedUpdateWithoutCompetitionInput>
+  }
+
+  export type RegistrationsUpdateManyWithWhereWithoutCompetitionInput = {
+    where: RegistrationsScalarWhereInput
+    data: XOR<RegistrationsUpdateManyMutationInput, RegistrationsUncheckedUpdateManyWithoutCompetitionInput>
+  }
+
+  export type UserCreateWithoutRegistrationsInput = {
+    userId?: string
+    email: string
+    name: string
+    password: string
+    role: $Enums.UserRole
+    createdAt?: Date | string
+  }
+
+  export type UserUncheckedCreateWithoutRegistrationsInput = {
+    userId?: string
+    email: string
+    name: string
+    password: string
+    role: $Enums.UserRole
+    createdAt?: Date | string
+  }
+
+  export type UserCreateOrConnectWithoutRegistrationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRegistrationsInput, UserUncheckedCreateWithoutRegistrationsInput>
+  }
+
+  export type CompetitionsCreateWithoutRegistrationsInput = {
+    competitionId?: string
+    title: string
+    description: string
+    tags?: CompetitionsCreatetagsInput | string[]
+    capacity: number
+    registeredCount?: number
+    regDeadLine: Date | string
+    startDate: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CompetitionsUncheckedCreateWithoutRegistrationsInput = {
+    competitionId?: string
+    title: string
+    description: string
+    tags?: CompetitionsCreatetagsInput | string[]
+    capacity: number
+    registeredCount?: number
+    regDeadLine: Date | string
+    startDate: Date | string
+    createdAt?: Date | string
+  }
+
+  export type CompetitionsCreateOrConnectWithoutRegistrationsInput = {
+    where: CompetitionsWhereUniqueInput
+    create: XOR<CompetitionsCreateWithoutRegistrationsInput, CompetitionsUncheckedCreateWithoutRegistrationsInput>
+  }
+
+  export type UserUpsertWithoutRegistrationsInput = {
+    update: XOR<UserUpdateWithoutRegistrationsInput, UserUncheckedUpdateWithoutRegistrationsInput>
+    create: XOR<UserCreateWithoutRegistrationsInput, UserUncheckedCreateWithoutRegistrationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRegistrationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRegistrationsInput, UserUncheckedUpdateWithoutRegistrationsInput>
+  }
+
+  export type UserUpdateWithoutRegistrationsInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateWithoutRegistrationsInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CompetitionsUpsertWithoutRegistrationsInput = {
+    update: XOR<CompetitionsUpdateWithoutRegistrationsInput, CompetitionsUncheckedUpdateWithoutRegistrationsInput>
+    create: XOR<CompetitionsCreateWithoutRegistrationsInput, CompetitionsUncheckedCreateWithoutRegistrationsInput>
+    where?: CompetitionsWhereInput
+  }
+
+  export type CompetitionsUpdateToOneWithWhereWithoutRegistrationsInput = {
+    where?: CompetitionsWhereInput
+    data: XOR<CompetitionsUpdateWithoutRegistrationsInput, CompetitionsUncheckedUpdateWithoutRegistrationsInput>
+  }
+
+  export type CompetitionsUpdateWithoutRegistrationsInput = {
+    competitionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    tags?: CompetitionsUpdatetagsInput | string[]
+    capacity?: IntFieldUpdateOperationsInput | number
+    registeredCount?: IntFieldUpdateOperationsInput | number
+    regDeadLine?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CompetitionsUncheckedUpdateWithoutRegistrationsInput = {
+    competitionId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    tags?: CompetitionsUpdatetagsInput | string[]
+    capacity?: IntFieldUpdateOperationsInput | number
+    registeredCount?: IntFieldUpdateOperationsInput | number
+    regDeadLine?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RegistrationsCreateManyUserInput = {
+    registrationID?: string
+    competitionId: string
+    registrationStatus?: $Enums.RegistrationStatus
+    registeredAt?: Date | string
+  }
+
+  export type RegistrationsUpdateWithoutUserInput = {
+    registrationID?: StringFieldUpdateOperationsInput | string
+    registrationStatus?: EnumRegistrationStatusFieldUpdateOperationsInput | $Enums.RegistrationStatus
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    competition?: CompetitionsUpdateOneRequiredWithoutRegistrationsNestedInput
+  }
+
+  export type RegistrationsUncheckedUpdateWithoutUserInput = {
+    registrationID?: StringFieldUpdateOperationsInput | string
+    competitionId?: StringFieldUpdateOperationsInput | string
+    registrationStatus?: EnumRegistrationStatusFieldUpdateOperationsInput | $Enums.RegistrationStatus
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RegistrationsUncheckedUpdateManyWithoutUserInput = {
+    registrationID?: StringFieldUpdateOperationsInput | string
+    competitionId?: StringFieldUpdateOperationsInput | string
+    registrationStatus?: EnumRegistrationStatusFieldUpdateOperationsInput | $Enums.RegistrationStatus
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RegistrationsCreateManyCompetitionInput = {
+    registrationID?: string
+    userId: string
+    registrationStatus?: $Enums.RegistrationStatus
+    registeredAt?: Date | string
+  }
+
+  export type RegistrationsUpdateWithoutCompetitionInput = {
+    registrationID?: StringFieldUpdateOperationsInput | string
+    registrationStatus?: EnumRegistrationStatusFieldUpdateOperationsInput | $Enums.RegistrationStatus
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRegistrationsNestedInput
+  }
+
+  export type RegistrationsUncheckedUpdateWithoutCompetitionInput = {
+    registrationID?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    registrationStatus?: EnumRegistrationStatusFieldUpdateOperationsInput | $Enums.RegistrationStatus
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RegistrationsUncheckedUpdateManyWithoutCompetitionInput = {
+    registrationID?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    registrationStatus?: EnumRegistrationStatusFieldUpdateOperationsInput | $Enums.RegistrationStatus
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

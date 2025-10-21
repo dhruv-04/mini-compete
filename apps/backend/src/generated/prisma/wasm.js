@@ -97,7 +97,8 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   name: 'name',
   password: 'password',
-  role: 'role'
+  role: 'role',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.CompetitionsScalarFieldEnum = {
@@ -108,6 +109,7 @@ exports.Prisma.CompetitionsScalarFieldEnum = {
   capacity: 'capacity',
   registeredCount: 'registeredCount',
   regDeadLine: 'regDeadLine',
+  startDate: 'startDate',
   createdAt: 'createdAt'
 };
 
@@ -115,6 +117,7 @@ exports.Prisma.RegistrationsScalarFieldEnum = {
   registrationID: 'registrationID',
   userId: 'userId',
   competitionId: 'competitionId',
+  registrationStatus: 'registrationStatus',
   registeredAt: 'registeredAt'
 };
 
@@ -157,6 +160,12 @@ exports.Prisma.JsonNullValueFilter = {
 exports.UserRole = exports.$Enums.UserRole = {
   participant: 'participant',
   organizer: 'organizer'
+};
+
+exports.RegistrationStatus = exports.$Enums.RegistrationStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED'
 };
 
 exports.Prisma.ModelName = {
@@ -213,13 +222,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum UserRole {\n  participant\n  organizer\n}\n\nmodel User {\n  userId   String   @id @default(uuid())\n  email    String   @unique\n  name     String\n  password String\n  role     UserRole\n}\n\nmodel Competitions {\n  competitionId   String   @id @default(uuid())\n  title           String\n  description     String\n  tags            String[]\n  capacity        Int\n  registeredCount Int      @default(0)\n  regDeadLine     DateTime\n  createdAt       DateTime @default(now())\n}\n\nmodel Registrations {\n  registrationID String   @id @default(uuid())\n  userId         String\n  competitionId  String\n  registeredAt   DateTime @default(now())\n\n  @@unique([userId, competitionId])\n}\n\nmodel MailBox {\n  id      String   @id @default(uuid())\n  userId  String\n  to      String\n  subject String\n  body    String\n  sentAt  DateTime @default(now())\n}\n\nmodel FailedJobs {\n  id       String   @id @default(uuid())\n  jobId    String\n  payload  Json\n  reason   String\n  failedAt DateTime @default(now())\n}\n",
-  "inlineSchemaHash": "c55ddd3868ae7e4d80263259c9e449621c8c20402192cfb23de72875af88f5d4",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum UserRole {\n  participant\n  organizer\n}\n\nenum RegistrationStatus {\n  PENDING\n  CONFIRMED\n  CANCELLED\n}\n\nmodel User {\n  userId        String          @id @default(uuid())\n  email         String          @unique\n  name          String\n  password      String\n  role          UserRole\n  createdAt     DateTime        @default(now())\n  registrations Registrations[]\n}\n\nmodel Competitions {\n  competitionId   String          @id @default(uuid())\n  title           String\n  description     String\n  tags            String[]\n  capacity        Int\n  registeredCount Int             @default(0)\n  regDeadLine     DateTime\n  startDate       DateTime\n  createdAt       DateTime        @default(now())\n  registrations   Registrations[]\n}\n\nmodel Registrations {\n  registrationID     String             @id @default(uuid())\n  userId             String\n  user               User               @relation(fields: [userId], references: [userId])\n  competitionId      String\n  competition        Competitions       @relation(fields: [competitionId], references: [competitionId])\n  registrationStatus RegistrationStatus @default(PENDING)\n  registeredAt       DateTime           @default(now())\n\n  @@unique([userId, competitionId])\n}\n\nmodel MailBox {\n  id      String   @id @default(uuid())\n  userId  String\n  to      String\n  subject String\n  body    String\n  sentAt  DateTime @default(now())\n}\n\nmodel FailedJobs {\n  id       String   @id @default(uuid())\n  jobId    String\n  payload  Json\n  reason   String\n  failedAt DateTime @default(now())\n}\n",
+  "inlineSchemaHash": "2122090277e443d256cd62fab7740c40931f3a7b44ce2cc0e11820cdaa7dfe7d",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"UserRole\"}],\"dbName\":null},\"Competitions\":{\"fields\":[{\"name\":\"competitionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tags\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"capacity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"registeredCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"regDeadLine\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Registrations\":{\"fields\":[{\"name\":\"registrationID\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"competitionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"registeredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"MailBox\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"to\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subject\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"body\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sentAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"FailedJobs\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"jobId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payload\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"reason\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"failedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"UserRole\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"registrations\",\"kind\":\"object\",\"type\":\"Registrations\",\"relationName\":\"RegistrationsToUser\"}],\"dbName\":null},\"Competitions\":{\"fields\":[{\"name\":\"competitionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tags\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"capacity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"registeredCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"regDeadLine\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"registrations\",\"kind\":\"object\",\"type\":\"Registrations\",\"relationName\":\"CompetitionsToRegistrations\"}],\"dbName\":null},\"Registrations\":{\"fields\":[{\"name\":\"registrationID\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RegistrationsToUser\"},{\"name\":\"competitionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"competition\",\"kind\":\"object\",\"type\":\"Competitions\",\"relationName\":\"CompetitionsToRegistrations\"},{\"name\":\"registrationStatus\",\"kind\":\"enum\",\"type\":\"RegistrationStatus\"},{\"name\":\"registeredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"MailBox\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"to\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subject\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"body\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sentAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"FailedJobs\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"jobId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payload\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"reason\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"failedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

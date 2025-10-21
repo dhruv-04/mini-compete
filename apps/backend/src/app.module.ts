@@ -7,6 +7,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { redisStore } from 'cache-manager-redis-store'
 import { CacheModule } from '@nestjs/cache-manager';
 import { BullModule } from "@nestjs/bullmq";
+import { ScheduleModule } from '@nestjs/schedule';
  
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { BullModule } from "@nestjs/bullmq";
         };
       },
     }),
+    ScheduleModule.forRoot(),
     PrismaModule,
     AuthModule,
   ],
