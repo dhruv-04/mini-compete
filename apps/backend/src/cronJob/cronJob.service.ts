@@ -42,7 +42,8 @@ export class CronWorkerService {
                         user: {
                             select: {
                                 email: true,
-                                name: true
+                                name: true,
+                                userId: true
                             }
                         }
                     }
@@ -53,6 +54,7 @@ export class CronWorkerService {
         for(const comp of competition) {
             for(const reg of comp.registrations) {
                 const payload = {
+                    userId: reg.user.userId,
                     name: reg.user.name,
                     email: reg.user.email,
                     title: comp.title,
@@ -61,7 +63,7 @@ export class CronWorkerService {
 
                 //adding the payload to reminder:notify queue
                 this.reminderQueue.add('send-reminder', payload);
-                console.log(`[CronJob] New reminder payload added for ${reg.user.email} at ${new Date().toISOString()}`)
+                console.log(`[CronJob] New reminder payload added for ${reg.user.email} at ${new Date().toISOString()}`);
             }
         }
     }
