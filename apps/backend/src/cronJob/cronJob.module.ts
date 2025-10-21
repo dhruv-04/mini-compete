@@ -1,6 +1,7 @@
 import { BullModule } from "@nestjs/bullmq";
 import { Module } from "@nestjs/common";
 import { PrismaModule } from "src/prisma/prisma.module";
+import { CronWorkerService } from "./cronJob.service";
 
 @Module({
     imports: [
@@ -9,7 +10,7 @@ import { PrismaModule } from "src/prisma/prisma.module";
         }),
         PrismaModule
     ],
-    providers: [],
+    providers: [CronWorkerService],
     exports: []
 })
 export class CronJobModule {}
