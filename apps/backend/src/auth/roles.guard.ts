@@ -27,7 +27,7 @@ export class RolesGuard implements CanActivate {
         }
 
         //verfiy token through jwt
-        const user = { email: "johdoe@gmail.com", role: 'organizer'};
+        const user = { userId: "johdoe@gmail.com", role: 'organizer'};
         
         request.user = user;
 
