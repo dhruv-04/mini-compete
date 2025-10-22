@@ -189,3 +189,62 @@ The slight delay is acceptable compared to the risk of inconsistent or invalid r
 | **Fairness & Data Integrity** | Prevents overselling of competition seats |
 
 ---
+
+
+
+## API Examples (cURL)
+
+These commands demonstrate the main application flows. Ensure your backend is running on port 3000.
+
+### 1. Sign Up (POST /auth/signup)
+
+```bash
+curl -X POST 'http://localhost:3000/auth/signup' \
+-H 'Content-Type: application/json' \
+-d '{
+    "name": "Jane Organizer",
+    "email": "jane@organizer.com",
+    "password": "securepassword123",
+    "role": "organizer"
+}'
+```
+(Save the returned JWT token for the next steps)
+
+### 2. Login (POST /auth/login)
+```bash
+curl -X POST 'http://localhost:3000/auth/login' \
+-H 'Content-Type: application/json' \
+-d '{
+    "email": "jane@organizer.com",
+    "password": "securepassword123"
+}'
+```
+(Save the new JWT token to the $TOKEN variable in your terminal)
+
+### 3. Create Competition (POST /competitions)
+```bash
+# Set your token variable first:
+# export TOKEN="<your_jwt_token_here>"
+
+curl -X POST 'http://localhost:3001/api/competitions' \
+-H "Authorization: Bearer $TOKEN" \
+-H 'Content-Type: application/json' \
+-d '{
+    "title": "Spring Code Challenge",
+    "description": "Solve three algorithmic problems.",
+    "tags": ["Tech", "Hackathon"],
+    "capacity": 50,
+    "regDeadline": "2025-11-01T23:59:00Z"
+}'
+```
+
+### 4. Register with Idempotency (POST /competitions/:id/register)
+```bash
+# Replace <COMP_ID> with the ID from step 3.
+# This simulates a client retrying a request using the same unique key.
+# export IDEMPOTENCY_KEY="your_unique_uuid_v4"
+
+curl -X POST 'http://localhost:3001/api/competitions/<COMP_ID>/register' \
+-H "Authorization: Bearer $PARTICIPANT_TOKEN" \
+-H "Idempotency-Key: your_unique_uuid_v4"
+```
