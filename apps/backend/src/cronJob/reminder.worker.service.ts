@@ -1,19 +1,21 @@
-import { Processor } from "@nestjs/bullmq";
+import { Processor, WorkerHost } from "@nestjs/bullmq";
 import { ReminderWorkerInterface } from "src/interfaces/reminder.worker.interface";
 import { Job } from "bullmq";
 import { PrismaService } from "src/prisma/prisma.service";
 import { Injectable } from "@nestjs/common";
 
-@Processor('reminder:notify')
+@Processor('reminder_notify')
 @Injectable()
-export class ReminderWorkerService {
-    constructor(private readonly prisma: PrismaService) {}
+export class ReminderWorkerService extends WorkerHost {
+    constructor(private readonly prisma: PrismaService) {
+        super()
+    }
 
     /**
      * Function to mail the user in the reminder:notify queue
      */
 
-    async ['send-reminder'](job: Job<ReminderWorkerInterface>) {
+    async process(job: Job<ReminderWorkerInterface>) {
         const { userId, name, email, title, startDate } = job.data;
 
         try {

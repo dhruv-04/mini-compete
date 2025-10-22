@@ -1,16 +1,15 @@
-import { Processor, OnQueueEvent } from "@nestjs/bullmq";
+import { Processor, OnQueueEvent, WorkerHost } from "@nestjs/bullmq";
 import { PrismaService } from "src/prisma/prisma.service";
 import { Job } from "bullmq";
+import { ConfirmationPayload } from "src/interfaces/confirmationJob.worker.interface";
+import { Injectable } from "@nestjs/common";
 
-interface ConfirmationPayload {
-    userId: string;
-    registrationId: string;
-    competitionId: string;
-};
-
-@Processor("registration:confirmation")
-export class WorkerService {
-    constructor(private readonly prisma: PrismaService) {}
+@Processor("registration_confirmation")
+@Injectable()
+export class WorkerService extends WorkerHost{
+    constructor(private readonly prisma: PrismaService) {
+        super()
+    }
 
     async process(job: Job<ConfirmationPayload>) {
         const { userId, registrationId, competitionId} = job.data;
@@ -50,6 +49,7 @@ export class WorkerService {
 
         console.log(`Email simulated for ${user.name} registration at ${new Date().toISOString()}`);
 
+        return { message: "success" }
 
     }
 };

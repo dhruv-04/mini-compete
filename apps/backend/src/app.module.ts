@@ -8,7 +8,10 @@ import { redisStore } from 'cache-manager-redis-store'
 import { CacheModule } from '@nestjs/cache-manager';
 import { BullModule } from "@nestjs/bullmq";
 import { CompetitionModule } from './competitions/competitions.module';
- 
+import { CronJobModule } from './cronJob/cronJob.module';
+import { ConfirmationJobModule } from './confirmationJob/confirmationJob.module';
+import { ScheduleModule } from '@nestjs/schedule';
+  
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -29,6 +32,7 @@ import { CompetitionModule } from './competitions/competitions.module';
         ttl: 3600
       }),
     }),
+    ScheduleModule.forRoot(),
     BullModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -44,6 +48,8 @@ import { CompetitionModule } from './competitions/competitions.module';
     PrismaModule,
     AuthModule,
     CompetitionModule,
+    CronJobModule,
+    ConfirmationJobModule
   ],
   controllers: [AppController],
   providers: [AppService],
