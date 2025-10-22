@@ -8,7 +8,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 export class CronWorkerService {
     constructor(
         private readonly prisma:PrismaService,
-        @InjectQueue('reminder:notify') private readonly reminderQueue:Queue
+        @InjectQueue('reminder_notify') private readonly reminderQueue:Queue
     ) {}
 
 
@@ -62,7 +62,12 @@ export class CronWorkerService {
                 }
 
                 //adding the payload to reminder:notify queue
-                this.reminderQueue.add('send-reminder', payload);
+                this.reminderQueue.add('send_reminder', payload, {
+                    attempts: 5,
+                    backoff: {
+                        type: 'exponential', delay: 1000
+                    }
+                });
                 console.log(`[CronJob] New reminder payload added for ${reg.user.email} at ${new Date().toISOString()}`);
             }
         }

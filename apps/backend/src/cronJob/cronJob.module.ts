@@ -6,7 +6,7 @@ import { CronWorkerService } from "./cronJob.service";
 @Module({
     imports: [
         BullModule.registerQueue({
-            name: 'reminder:notify'
+            name: 'reminder_notify'
         }),
         PrismaModule
     ],

@@ -3,20 +3,21 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { CreateCompetitionDTO } from "./competitionsDto/createCompetitions.dto"; 
 import type { Cache } from 'cache-manager';
 import { CACHE_MANAGER } from "@nestjs/cache-manager";
-import { error } from "console";
+import { QueueService } from "src/confirmationJob/confirmationJobQueue.service.ts";
 
 @Injectable()
 export class CompetitionsServices {
     constructor(private readonly prisma: PrismaService, 
-        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache
+        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+        private readonly queue: QueueService
     ) {}
 
     async createCompetitions(createCompetition: CreateCompetitionDTO) {
 
         //generate the startDate for the competition
         const deadlineDate = new Date(createCompetition.regDeadline);
-        deadlineDate.setDate(deadlineDate.getDate() + 1);
-        const startDate = deadlineDate; // This is now one day later
+        const startDate = new Date(deadlineDate);
+        startDate.setDate(deadlineDate.getDate() + 1);
 
         //push the info into the database
         const competition = await this.prisma.competitions.create({
@@ -58,14 +59,13 @@ export class CompetitionsServices {
         //if idempotency key doesn't exist in redis
         if(!cacheIdempotency) {
             try {
-                    await this.cacheManager.set(`indempotency:${idempotencyKey}`, userId, 3600);
+                    await this.cacheManager.set(`idempotency:${idempotencyKey}`, userId, 3600);
                     console.log(`Idempotency key added to Redis for user ${userId} registration request at ${new Date().toISOString()}`)
             } catch (err) {
                 throw new err;
             }
         }
 
-        //TODO: Add code for registration
         const registration = await this.prisma.$transaction(async (tx) => {
 
             //query the registeredCount and regDeadline from Competition table
@@ -97,6 +97,14 @@ export class CompetitionsServices {
                 select: {
                     registrationID: true
                 }
+            });
+
+
+            //add the registration to the registration:confirmation queue
+            await this.queue.insertIntoQueue({
+                userId: userId,
+                competitionId: competitionId,
+                registrationId: registration.registrationId.registrationID
             });
 
             return { message: "Registration successful!", registrationId: registrationId};
